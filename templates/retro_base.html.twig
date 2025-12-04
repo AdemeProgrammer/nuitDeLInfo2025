@@ -34,7 +34,7 @@
 
         {% block body %}
             <div class="retro-container">
-                {#  {% block header %}
+                  {% block header %}
                     <header class="retro-border retro-mb-2">
                         <h1 class="retro-title retro-center">
                             {% block header_title %}🎮 NUIT DE L'INFO 2025 🎮{% endblock %}
@@ -43,9 +43,9 @@
                             {% block header_subtitle %}DÉFI IUTLCO - MODE RETRO GAMING ACTIVÉ{% endblock %}
                         </p>
                     </header>
-                {% endblock %}#}
+                {% endblock %}
 
-                {% block navigation %}
+                {#{% block navigation %}
                     <nav class="retro-mb-2">
                         <ul class="retro-menu">
                             {% block menu_items %}
@@ -55,7 +55,7 @@
                             {% endblock %}
                         </ul>
                     </nav>
-                {% endblock %}
+                {% endblock %}#}
 
                 {% block content %}
                     <main>
