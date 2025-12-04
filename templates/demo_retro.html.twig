@@ -1,0 +1,203 @@
+{#
+    PAGE DE DÉMONSTRATION RETRO GAMING
+    Exemple d'utilisation du template modulable
+#}
+{% extends 'retro_base.html.twig' %}
+
+{% block title %}DÉMO RETRO GAMING{% endblock %}
+
+{# Variables pour personnaliser le comportement #}
+{% set retro_mode = true %}
+{% set enable_typewriter = false %}
+{% set enable_hover_effects = true %}
+
+{% block header_title %}
+    <span class="retro-glitch" data-text="★ RETRO GAMING DEMO ★">★ RETRO GAMING DEMO ★</span>
+{% endblock %}
+
+{% block header_subtitle %}
+    NUIT DE L'INFO 2025 - DÉFI IUTLCO
+    <br>
+    <span class="retro-blink">▶ ON VEUT DU GROS PIXEL! ◀</span>
+{% endblock %}
+
+{% block menu_items %}
+    <li class="retro-menu-item active">🏠 HOME</li>
+    <li class="retro-menu-item">🎮 GAMES</li>
+    <li class="retro-menu-item">🏆 HIGH SCORES</li>
+    <li class="retro-menu-item">⚙️ OPTIONS</li>
+    <li class="retro-menu-item">📖 ABOUT</li>
+{% endblock %}
+
+{% block main_content %}
+    {# Section d'introduction #}
+    <div class="retro-card retro-float">
+        <h2 class="retro-subtitle">🎮 MISSION ACCOMPLIE!</h2>
+        <p class="retro-text retro-mb-2">
+            Ce template répond au défi IUTLCO de la Nuit de l'Info 2025.
+            Il offre une expérience rétro gaming complète avec des effets pixel art,
+            des animations style arcade, et une esthétique 8-bit authentique.
+        </p>
+
+        <div class="retro-progress-bar retro-mb-1">
+            <div class="retro-progress-fill" style="width: 85%"></div>
+        </div>
+        <p class="retro-text retro-center">PIXEL POWER: 85%</p>
+    </div>
+
+    {# Grille de fonctionnalités #}
+    <div class="retro-grid retro-mt-2">
+        <div class="retro-card">
+            <h3 class="retro-subtitle">🎨 STYLE RÉTRO</h3>
+            <p class="retro-text">
+                • Police pixel art<br>
+                • Effets CRT scanlines<br>
+                • Couleurs néon vibrantes<br>
+                • Bordures pixel parfaites
+            </p>
+        </div>
+
+        <div class="retro-card">
+            <h3 class="retro-subtitle">✨ ANIMATIONS</h3>
+            <p class="retro-text">
+                • Effets de clignotement<br>
+                • Transitions pixel art<br>
+                • Particules animées<br>
+                • Champ d'étoiles
+            </p>
+        </div>
+
+        <div class="retro-card">
+            <h3 class="retro-subtitle">🎵 INTERACTIVITÉ</h3>
+            <p class="retro-text">
+                • Sons 8-bit<br>
+                • Code Konami secret<br>
+                • Effets hover<br>
+                • Mode toggle
+            </p>
+        </div>
+
+        <div class="retro-card">
+            <h3 class="retro-subtitle">📱 RESPONSIVE</h3>
+            <p class="retro-text">
+                • Design adaptatif<br>
+                • Mobile friendly<br>
+                • Performance optimisée<br>
+                • Cross-browser
+            </p>
+        </div>
+    </div>
+
+    {# Section de démonstration des composants #}
+    <div class="retro-card retro-mt-2">
+        <h2 class="retro-subtitle">🛠️ COMPOSANTS DISPONIBLES</h2>
+
+        <div class="retro-mb-2">
+            <h3 class="retro-subtitle retro-mt-2">BOUTONS:</h3>
+            <button class="retro-button" onclick="alert('BEEP BOOP! 🎮')">BOUTON PRIMARY</button>
+            <button class="retro-button secondary" onclick="alert('GAME START! 👾')">BOUTON SECONDARY</button>
+        </div>
+
+        <div class="retro-mb-2">
+            <h3 class="retro-subtitle retro-mt-2">BADGES:</h3>
+            <span class="retro-badge">PLAYER 1</span>
+            <span class="retro-badge">LIVES: 3</span>
+            <span class="retro-badge">COINS: 99</span>
+        </div>
+
+        <div class="retro-mb-2">
+            <h3 class="retro-subtitle retro-mt-2">BARRE DE PROGRESSION:</h3>
+            <div class="retro-progress-bar">
+                <div class="retro-progress-fill" style="width: 65%"></div>
+            </div>
+        </div>
+    </div>
+
+    {# Console de log style rétro #}
+    <div class="retro-card retro-mt-2">
+        <h2 class="retro-subtitle">💻 CONSOLE SYSTÈME</h2>
+        <div class="retro-console">
+            <div class="retro-console-line">SYSTEM BOOT v1.0</div>
+            <div class="retro-console-line">LOADING RETRO MODE...</div>
+            <div class="retro-console-line">CHECKING PIXEL RATIO... OK</div>
+            <div class="retro-console-line">INITIALIZING 8-BIT SOUND... OK</div>
+            <div class="retro-console-line">CREATING SCANLINES... OK</div>
+            <div class="retro-console-line">SPAWNING STARFIELD... OK</div>
+            <div class="retro-console-line">ALL SYSTEMS OPERATIONAL</div>
+            <div class="retro-console-line" style="color: #00ff41;">READY PLAYER ONE!</div>
+        </div>
+    </div>
+
+    {# Instructions #}
+    <div class="retro-card retro-mt-2">
+        <h2 class="retro-subtitle">🎮 INSTRUCTIONS</h2>
+        <p class="retro-text retro-mb-1">
+            <strong>TOGGLE MODE RÉTRO:</strong> Utilisez le bouton "8-BIT MODE" en bas à droite
+        </p>
+        <p class="retro-text retro-mb-1">
+            <strong>CODE SECRET:</strong> Tapez le code Konami: ↑ ↑ ↓ ↓ ← → ← → B A
+        </p>
+        <p class="retro-text retro-mb-1">
+            <strong>PERSONNALISATION:</strong> Modifiez les variables CSS dans retro-gaming.css
+        </p>
+        <p class="retro-text">
+            <strong>INTÉGRATION:</strong> Étendez retro_base.html.twig ou utilisez les classes individuellement
+        </p>
+    </div>
+
+    {# Exemple d'intégration dans vos pages #}
+    <div class="retro-card retro-mt-2">
+        <h2 class="retro-subtitle">📝 EXEMPLE D'UTILISATION</h2>
+        <div class="retro-console">
+            <div class="retro-console-line">{% verbatim %}{% extends 'retro_base.html.twig' %}{% endverbatim %}</div>
+            <div class="retro-console-line">&nbsp;</div>
+            <div class="retro-console-line">{% verbatim %}{% block main_content %}{% endverbatim %}</div>
+            <div class="retro-console-line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="retro-card"&gt;</div>
+            <div class="retro-console-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt;Votre contenu&lt;/h2&gt;</div>
+            <div class="retro-console-line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</div>
+            <div class="retro-console-line">{% verbatim %}{% endblock %}{% endverbatim %}</div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_content %}
+    {# Section bonus #}
+    <div class="retro-center retro-mt-3">
+        <p class="retro-subtitle">
+            <span class="retro-blink">✨</span>
+            CRÉÉ POUR LA NUIT DE L'INFO 2025
+            <span class="retro-blink">✨</span>
+        </p>
+        <p class="retro-text">
+            Département Informatique IUT Littoral Côte d'Opale
+        </p>
+    </div>
+{% endblock %}
+
+{% block footer_text %}
+    <span class="retro-blink">█</span> INSERT COIN TO CONTINUE <span class="retro-blink">█</span>
+    <br>
+    <small style="font-size: 0.6rem;">© 2025 - NUIT DE L'INFO - TOUS DROITS RÉSERVÉS</small>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        // Animation de la barre de progression au chargement
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBar = document.querySelector('.retro-progress-fill');
+            if (progressBar && window.retroGaming) {
+                progressBar.style.width = '0%';
+                setTimeout(() => {
+                    window.retroGaming.animateProgressBar('.retro-progress-fill', 85, 2000);
+                }, 500);
+            }
+
+            // Message de bienvenue
+            setTimeout(() => {
+                if (window.retroGaming) {
+                    window.retroGaming.showNotification('🎮 BIENVENUE! 🎮', 'success');
+                }
+            }, 1000);
+        });
+    </script>
+{% endblock %}

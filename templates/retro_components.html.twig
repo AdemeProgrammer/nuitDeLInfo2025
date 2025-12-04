@@ -1,0 +1,257 @@
+{#
+    BIBLIOTHÈQUE DE COMPOSANTS RETRO GAMING
+    À inclure ou copier dans vos templates
+
+    Usage:
+    {% include 'retro_components.html.twig' with {'component': 'button', 'text': 'Mon Bouton'} %}
+#}
+
+{# ============================================
+   BOUTON RETRO
+   ============================================ #}
+{% macro retro_button(text, type='primary', onclick='', class='') %}
+    <button class="retro-button {{ type == 'secondary' ? 'secondary' : '' }} {{ class }}"
+            {% if onclick %}onclick="{{ onclick }}"{% endif %}>
+        {{ text|upper }}
+    </button>
+{% endmacro %}
+
+{# ============================================
+   CARTE RETRO
+   ============================================ #}
+{% macro retro_card(title, content, float=false) %}
+    <div class="retro-card {{ float ? 'retro-float' : '' }}">
+        {% if title %}
+            <h3 class="retro-subtitle">{{ title }}</h3>
+        {% endif %}
+        <div class="retro-text">
+            {{ content|raw }}
+        </div>
+    </div>
+{% endmacro %}
+
+{# ============================================
+   BADGE/SCORE
+   ============================================ #}
+{% macro retro_badge(text, blink=false) %}
+    <span class="retro-badge {{ blink ? 'retro-blink' : '' }}">
+        {{ text|upper }}
+    </span>
+{% endmacro %}
+
+{# ============================================
+   BARRE DE PROGRESSION
+   ============================================ #}
+{% macro retro_progress(label, percent, id='') %}
+    <div class="retro-mb-1">
+        {% if label %}
+            <p class="retro-text retro-mb-1">{{ label }}:</p>
+        {% endif %}
+        <div class="retro-progress-bar">
+            <div class="retro-progress-fill" {% if id %}id="{{ id }}"{% endif %} style="width: {{ percent }}%"></div>
+        </div>
+    </div>
+{% endmacro %}
+
+{# ============================================
+   MENU RETRO
+   ============================================ #}
+{% macro retro_menu(items, active=0) %}
+    <ul class="retro-menu">
+        {% for index, item in items %}
+            <li class="retro-menu-item {{ index == active ? 'active' : '' }}"
+                {% if item.href %}onclick="location.href='{{ item.href }}'"{% endif %}>
+                {{ item.icon|default('') }} {{ item.label|upper }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endmacro %}
+
+{# ============================================
+   CONSOLE/TERMINAL
+   ============================================ #}
+{% macro retro_console(lines, height='300px') %}
+    <div class="retro-console" style="max-height: {{ height }};">
+        {% for line in lines %}
+            <div class="retro-console-line">{{ line }}</div>
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{# ============================================
+   TITRE AVEC EFFET GLITCH
+   ============================================ #}
+{% macro retro_title_glitch(text) %}
+    <h1 class="retro-title retro-glitch" data-text="{{ text }}">
+        {{ text }}
+    </h1>
+{% endmacro %}
+
+{# ============================================
+   GRILLE DE CARTES
+   ============================================ #}
+{% macro retro_grid(cards) %}
+    <div class="retro-grid">
+        {% for card in cards %}
+            <div class="retro-card">
+                {% if card.title %}
+                    <h3 class="retro-subtitle">{{ card.icon|default('') }} {{ card.title }}</h3>
+                {% endif %}
+                {% if card.content %}
+                    <p class="retro-text">{{ card.content|raw }}</p>
+                {% endif %}
+                {% if card.button %}
+                    <div class="retro-mt-1">
+                        <button class="retro-button" onclick="{{ card.button.onclick }}">
+                            {{ card.button.text }}
+                        </button>
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{# ============================================
+   HEADER AVEC BORDURE
+   ============================================ #}
+{% macro retro_header(title, subtitle='') %}
+    <header class="retro-border retro-mb-2">
+        <h1 class="retro-title retro-center">{{ title }}</h1>
+        {% if subtitle %}
+            <p class="retro-subtitle retro-center">{{ subtitle }}</p>
+        {% endif %}
+    </header>
+{% endmacro %}
+
+{# ============================================
+   NOTIFICATION/ALERT
+   ============================================ #}
+{% macro retro_alert(message, type='info') %}
+    <div class="retro-card" style="border-color: var(--retro-{{ type }});">
+        <p class="retro-text" style="color: var(--retro-{{ type }});">
+            {% if type == 'warning' %}⚠️{% elseif type == 'danger' %}❌{% elseif type == 'success' %}✅{% else %}ℹ️{% endif %}
+            {{ message }}
+        </p>
+    </div>
+{% endmacro %}
+
+{# ============================================
+   STATS/COMPTEURS
+   ============================================ #}
+{% macro retro_stats(stats) %}
+    <div class="retro-grid">
+        {% for stat in stats %}
+            <div class="retro-card retro-center">
+                <div class="retro-title" style="font-size: 2rem; color: var(--retro-accent);">
+                    {{ stat.value }}
+                </div>
+                <p class="retro-text retro-mt-1">{{ stat.label }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{# ============================================
+   FOOTER RETRO
+   ============================================ #}
+{% macro retro_footer(text='') %}
+    <footer class="retro-border retro-mt-3">
+        <div class="retro-center">
+            <p class="retro-text">
+                <span class="retro-blink">★</span>
+                {{ text|default('NUIT DE L\'INFO 2025') }}
+                <span class="retro-blink">★</span>
+            </p>
+        </div>
+    </footer>
+{% endmacro %}
+
+{# ============================================
+   FORMULAIRE RETRO
+   ============================================ #}
+{% macro retro_input(label, name, type='text', placeholder='') %}
+    <div class="retro-mb-1">
+        {% if label %}
+            <label class="retro-text retro-mb-1" for="{{ name }}">{{ label }}:</label>
+        {% endif %}
+        <input type="{{ type }}"
+               id="{{ name }}"
+               name="{{ name }}"
+               placeholder="{{ placeholder }}"
+               style="width: 100%;
+                      padding: 15px;
+                      background: var(--retro-dark);
+                      border: 3px solid var(--retro-primary);
+                      color: var(--retro-primary);
+                      font-family: var(--font-pixel);
+                      font-size: 0.8rem;">
+    </div>
+{% endmacro %}
+
+{# ============================================
+   EXEMPLE D'UTILISATION
+   ============================================ #}
+{% if example|default(false) %}
+    {% import _self as retro %}
+
+    <div class="retro-container">
+        {# Header #}
+        {{ retro.retro_header('🎮 COMPOSANTS RETRO 🎮', 'Bibliothèque de composants réutilisables') }}
+
+        {# Boutons #}
+        <div class="retro-card">
+            <h3 class="retro-subtitle">BOUTONS:</h3>
+            {{ retro.retro_button('Click Me!', 'primary', 'alert("Primary!")') }}
+            {{ retro.retro_button('Secondary', 'secondary', 'alert("Secondary!")') }}
+        </div>
+
+        {# Badges #}
+        <div class="retro-card retro-mt-2">
+            <h3 class="retro-subtitle">BADGES:</h3>
+            {{ retro.retro_badge('Score: 9999') }}
+            {{ retro.retro_badge('Level Max', true) }}
+        </div>
+
+        {# Progress Bars #}
+        <div class="retro-card retro-mt-2">
+            <h3 class="retro-subtitle">BARRES DE PROGRESSION:</h3>
+            {{ retro.retro_progress('Vie', 75) }}
+            {{ retro.retro_progress('Mana', 50) }}
+            {{ retro.retro_progress('XP', 90) }}
+        </div>
+
+        {# Menu #}
+        <div class="retro-card retro-mt-2">
+            <h3 class="retro-subtitle">MENU:</h3>
+            {{ retro.retro_menu([
+                {'label': 'Accueil', 'icon': '🏠', 'href': '/'},
+                {'label': 'Jouer', 'icon': '🎮', 'href': '/play'},
+                {'label': 'Scores', 'icon': '🏆', 'href': '/scores'}
+            ], 0) }}
+        </div>
+
+        {# Console #}
+        <div class="retro-card retro-mt-2">
+            <h3 class="retro-subtitle">CONSOLE:</h3>
+            {{ retro.retro_console([
+                'System boot...',
+                'Loading game...',
+                'Press START to continue'
+            ]) }}
+        </div>
+
+        {# Stats #}
+        <div class="retro-mt-2">
+            <h3 class="retro-subtitle retro-center">STATISTIQUES:</h3>
+            {{ retro.retro_stats([
+                {'value': '9999', 'label': 'SCORE'},
+                {'value': '42', 'label': 'NIVEAU'},
+                {'value': '∞', 'label': 'VIES'}
+            ]) }}
+        </div>
+
+        {# Footer #}
+        {{ retro.retro_footer('Nuit de l\'Info 2025 - Défi IUTLCO') }}
+    </div>
+{% endif %}

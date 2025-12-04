@@ -1,0 +1,185 @@
+{% extends "retro_base.html.twig" %}
+
+{% block title %}Console Linux Interactive{% endblock %}
+
+{% block header_title %}🖥️ CONSOLE LINUX RETRO 🖥️{% endblock %}
+{% block header_subtitle %}MODE TERMINAL ACTIVÉ{% endblock %}
+
+{% block main_content %}
+    <div class="retro-card">
+        <h2 class="retro-subtitle">🎮 TERMINAL INTERACTIF</h2>
+        <p class="retro-text">
+            Une console Linux rétro avec système de commandes personnalisables!
+        </p>
+    </div>
+
+    {# Container pour le terminal #}
+    <div id="terminal-container"></div>
+
+    <div class="retro-card retro-mt-2">
+        <h3 class="retro-subtitle">📖 GUIDE D'UTILISATION</h3>
+        <div class="retro-text">
+            <p><strong>Commandes disponibles:</strong></p>
+            <ul style="list-style: none; padding-left: 20px;">
+                <li>• <span style="color: #00ffff;">help</span> - Affiche l'aide</li>
+                <li>• <span style="color: #00ffff;">clear</span> - Efface l'écran</li>
+                <li>• <span style="color: #00ffff;">echo [texte]</span> - Affiche du texte</li>
+                <li>• <span style="color: #00ffff;">print [texte]</span> - Affiche du texte stylisé</li>
+                <li>• <span style="color: #00ffff;">ls</span> - Liste les fichiers</li>
+                <li>• <span style="color: #00ffff;">snake</span> - Lance le jeu Snake</li>
+                <li>• <span style="color: #00ffff;">matrix</span> - Effet Matrix</li>
+                <li>• <span style="color: #00ffff;">hack</span> - Mode hacker</li>
+                <li>• <span style="color: #00ffff;">coffee</span> - Prépare un café</li>
+                <li>• <span style="color: #00ffff;">rien</span> - Commande secrète...</li>
+            </ul>
+            <p style="margin-top: 15px;"><strong>Raccourcis clavier:</strong></p>
+            <ul style="list-style: none; padding-left: 20px;">
+                <li>• <span style="color: #ffff00;">↑↓</span> - Navigation dans l'historique</li>
+                <li>• <span style="color: #ffff00;">TAB</span> - Autocomplétion</li>
+                <li>• <span style="color: #ffff00;">Ctrl+L</span> - Effacer l'écran</li>
+                <li>• <span style="color: #ffff00;">Ctrl+C</span> - Annuler</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="retro-card retro-mt-2">
+        <h3 class="retro-subtitle">⚙️ PERSONNALISATION</h3>
+        <div class="retro-text">
+            <p>Vous pouvez facilement ajouter vos propres commandes:</p>
+            <div style="background: #000; border: 2px solid #00ff41; padding: 15px; margin-top: 10px; font-family: 'Courier New', monospace; font-size: 12px;">
+// Ajouter une nouvelle commande<br>
+terminal.addCommand('macommande', function(args) {<br>
+&nbsp;&nbsp;this.print('Ma commande fonctionne!', 'success');<br>
+});<br>
+<br>
+// Exécuter une commande par code<br>
+terminal.execute('echo Bonjour!');
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {# Inclusion du script de la console #}
+    <script src="{{ asset('js/linux-terminal.js') }}"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialiser le terminal avec des options personnalisées
+            const terminal = new LinuxTerminal('terminal-container', {
+                username: 'hacker',
+                hostname: 'nuit-de-linfo',
+                welcomeMessage: `
+╔════════════════════════════════════════════════════════════╗
+║                                                            ║
+║   ███╗   ██╗██╗   ██╗██╗████████╗    ██████╗ ███████╗    ║
+║   ████╗  ██║██║   ██║██║╚══██╔══╝    ██╔══██╗██╔════╝    ║
+║   ██╔██╗ ██║██║   ██║██║   ██║       ██║  ██║█████╗      ║
+║   ██║╚██╗██║██║   ██║██║   ██║       ██║  ██║██╔══╝      ║
+║   ██║ ╚████║╚██████╔╝██║   ██║       ██████╔╝███████╗    ║
+║   ╚═╝  ╚═══╝ ╚═════╝ ╚═╝   ╚═╝       ╚═════╝ ╚══════╝    ║
+║                                                            ║
+║        ██╗         ██╗██╗███╗   ██╗███████╗ ██████╗       ║
+║        ██║         ██║██║████╗  ██║██╔════╝██╔═══██╗      ║
+║        ██║         ██║██║██╔██╗ ██║█████╗  ██║   ██║      ║
+║        ██║         ██║██║██║╚██╗██║██╔══╝  ██║   ██║      ║
+║        ███████╗    ██║██║██║ ╚████║██║     ╚██████╔╝      ║
+║        ╚══════╝    ╚═╝╚═╝╚═╝  ╚═══╝╚═╝      ╚═════╝       ║
+║                                                            ║
+║                  🎮 NUIT DE L'INFO 2025 🎮                 ║
+║                   Terminal Retro v1.0                     ║
+║                                                            ║
+╚════════════════════════════════════════════════════════════╝
+
+Bienvenue dans le terminal rétro gaming!
+Tapez 'help' pour voir toutes les commandes disponibles.
+Essayez 'rien' pour une surprise... 😉
+`
+            });
+
+            // Rendre le terminal accessible globalement
+            window.terminal = terminal;
+
+            // Ajouter des commandes personnalisées supplémentaires
+            terminal.addCommand('bonjour', function(args) {
+                const name = args[0] || 'visiteur';
+                this.print(`👋 Salut ${name}! Bienvenue à la Nuit de l'Info!`, 'success');
+            });
+
+            terminal.addCommand('score', function(args) {
+                this.print('🏆 TABLEAU DES SCORES 🏆', 'warning');
+                this.print('─────────────────────────────', 'output');
+                this.print('1. Player1 .......... 9999', 'success');
+                this.print('2. Player2 .......... 8888', 'output');
+                this.print('3. YOU .............. 7777', 'warning');
+                this.print('─────────────────────────────', 'output');
+            });
+
+            terminal.addCommand('easteregg', function(args) {
+                this.print('🥚 Vous avez trouvé un Easter Egg!', 'success');
+                this.print('', 'output');
+                const egg = `
+       _,.--.,_
+      ,'  ____  '.
+     /   /    \\  \\
+    |   |  ||  |  |
+     \\   \\    /  /
+      '.  '||'  ,'
+        '-.__.-'
+`;
+                this.print(egg, 'warning');
+                this.print('🎁 Félicitations! +100 points bonus!', 'success');
+            });
+
+            terminal.addCommand('about', function(args) {
+                this.print('', 'output');
+                this.print('╔═══════════════════════════════════════════════╗', 'success');
+                this.print('║                                               ║', 'success');
+                this.print('║         NUIT DE L\'INFO 2025                   ║', 'success');
+                this.print('║         Défi IUTLCO                           ║', 'success');
+                this.print('║                                               ║', 'success');
+                this.print('║   Console Linux interactive avec système      ║', 'success');
+                this.print('║   de commandes extensibles et personnalisables║', 'success');
+                this.print('║                                               ║', 'success');
+                this.print('║   Thème: Rétro Gaming / Terminal Linux        ║', 'success');
+                this.print('║   Version: 1.0                                ║', 'success');
+                this.print('║                                               ║', 'success');
+                this.print('╚═══════════════════════════════════════════════╝', 'success');
+                this.print('', 'output');
+            });
+
+            terminal.addCommand('fortune', function(args) {
+                const fortunes = [
+                    '🔮 Votre code compilera du premier coup demain... ou pas.',
+                    '🔮 Un bug se cache dans votre code. Cherchez bien!',
+                    '🔮 La force du café sera avec vous.',
+                    '🔮 Vous allez gagner la Nuit de l\'Info!',
+                    '🔮 N\'oubliez pas de commit avant minuit.',
+                    '🔮 Ctrl+Z sera votre meilleur ami aujourd\'hui.',
+                    '🔮 Une pizza arrive dans 30 minutes.',
+                    '🔮 Le Stack Overflow est fort en vous.'
+                ];
+                const random = fortunes[Math.floor(Math.random() * fortunes.length)];
+                this.print(random, 'warning');
+            });
+
+            terminal.addCommand('cowsay', function(args) {
+                const message = args.join(' ') || 'Moo!';
+                const cow = `
+ ${'-'.repeat(message.length + 2)}
+< ${message} >
+ ${'-'.repeat(message.length + 2)}
+        \\   ^__^
+         \\  (oo)\\_______
+            (__)\\       )\\/\\
+                ||----w |
+                ||     ||
+`;
+                this.print(cow, 'output');
+            });
+
+            // Exemple: exécuter une commande automatiquement au chargement
+            // terminal.execute('about');
+        });
+    </script>
+{% endblock %}

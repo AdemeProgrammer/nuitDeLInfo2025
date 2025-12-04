@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir /b \"C:\\wamp64\\www\\SYMFONY\\nuitDeLInfo2025\\public\")",
+      "Bash(dir /b \"C:\\wamp64\\www\\SYMFONY\\nuitDeLInfo2025\")",
+      "Bash(findstr:*)",
+      "Bash(ls:*)",
+      "Bash(php bin/console:*)",
+      "Bash(dir /b \"C:\\wamp64\\www\\SYMFONY\\nuitDeLInfo2025\\public\\css\")",
+      "Bash(dir /b \"C:\\wamp64\\www\\SYMFONY\\nuitDeLInfo2025\\public\\js\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

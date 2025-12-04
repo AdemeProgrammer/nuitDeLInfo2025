@@ -1,0 +1,122 @@
+{#
+    TEMPLATE MODULABLE RETRO GAMING
+    Nuit de l'Info 2025 - Défi IUTLCO
+
+    Ce template peut être utilisé de deux façons :
+    1. Extends ce template pour créer une page complètement rétro
+    2. Utilise les composants individuellement dans vos pages existantes
+#}
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}🎮 MODE RETRO GAMING{% endblock %} - Nuit de l'Info 2025</title>
+
+        {# Favicon rétro #}
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
+
+        {# CSS Rétro Gaming #}
+        <link rel="stylesheet" href="{{ asset('css/retro-gaming.css') }}">
+
+        {% block stylesheets %}
+        {% endblock %}
+    </head>
+
+    {# La classe retro-mode peut être ajoutée conditionnellement #}
+    <body{% if retro_mode|default(true) %} class="retro-mode"{% endif %}>
+
+        {% block body %}
+            <div class="retro-container">
+                {% block header %}
+                    <header class="retro-border retro-mb-2">
+                        <h1 class="retro-title retro-center">
+                            {% block header_title %}🎮 NUIT DE L'INFO 2025 🎮{% endblock %}
+                        </h1>
+                        <p class="retro-subtitle retro-center">
+                            {% block header_subtitle %}DÉFI IUTLCO - MODE RETRO GAMING ACTIVÉ{% endblock %}
+                        </p>
+                    </header>
+                {% endblock %}
+
+                {% block navigation %}
+                    <nav class="retro-mb-2">
+                        <ul class="retro-menu">
+                            {% block menu_items %}
+                                <li class="retro-menu-item active">ACCUEIL</li>
+                                <li class="retro-menu-item">À PROPOS</li>
+                                <li class="retro-menu-item">CONTACT</li>
+                            {% endblock %}
+                        </ul>
+                    </nav>
+                {% endblock %}
+
+                {% block content %}
+                    <main>
+                        {% block main_content %}
+                            <div class="retro-card">
+                                <h2 class="retro-subtitle">BIENVENUE DANS LE MODE RÉTRO!</h2>
+                                <p class="retro-text">
+                                    Ce template est totalement modulable et peut être personnalisé selon vos besoins.
+                                </p>
+                            </div>
+                        {% endblock %}
+
+                        {% block extra_content %}{% endblock %}
+                    </main>
+                {% endblock %}
+
+                {% block footer %}
+                    <footer class="retro-border retro-mt-3">
+                        <div class="retro-center">
+                            <p class="retro-text">
+                                {% block footer_text %}
+                                    <span class="retro-blink">★</span> NUIT DE L'INFO 2025 <span class="retro-blink">★</span>
+                                {% endblock %}
+                            </p>
+                            <div class="retro-mt-1">
+                                <span class="retro-badge">SCORE: 9999</span>
+                                <span class="retro-badge">LEVEL: MAX</span>
+                            </div>
+                        </div>
+                    </footer>
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+        {# JavaScript Rétro Gaming #}
+        <script src="{{ asset('js/retro-gaming.js') }}"></script>
+
+        {% block javascripts %}
+        {% endblock %}
+
+        {# Script d'initialisation optionnel #}
+        {% block retro_init %}
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Effet typewriter sur le titre (optionnel)
+                    {% if enable_typewriter|default(false) %}
+                    const title = document.querySelector('.retro-title');
+                    if (title && window.retroGaming) {
+                        const text = title.textContent;
+                        window.retroGaming.typeWriter(title, text, 50);
+                    }
+                    {% endif %}
+
+                    // Effets hover sur les boutons (optionnel)
+                    {% if enable_hover_effects|default(true) %}
+                    if (window.retroGaming) {
+                        window.retroGaming.addHoverEffects('.retro-button, .retro-menu-item');
+                    }
+                    {% endif %}
+
+                    // Message de bienvenue dans la console
+                    console.log('%c🎮 MODE RETRO GAMING ACTIVÉ! 🎮', 'color: #00ff41; font-size: 20px; font-weight: bold;');
+                    console.log('%cNuit de l\'Info 2025 - Défi IUTLCO', 'color: #00ffff; font-size: 14px;');
+                    console.log('%cAstuce: Tape le code Konami pour des effets spéciaux!', 'color: #ff00ff; font-size: 12px;');
+                    console.log('%c↑ ↑ ↓ ↓ ← → ← → B A', 'color: #ffff00; font-size: 12px; font-weight: bold;');
+                });
+            </script>
+        {% endblock %}
+    </body>
+</html>
