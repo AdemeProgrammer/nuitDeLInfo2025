@@ -1,0 +1,405 @@
+{#
+    EXEMPLE D'INTÉGRATION - THÈME OCÉANS
+    Démontre comment adapter le template rétro au thème de la Nuit de l'Info
+#}
+{% extends 'retro_base.html.twig' %}
+
+{% block title %}MISSION OCÉAN PIXEL{% endblock %}
+
+{# Personnalisation des couleurs pour le thème océan #}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        :root {
+            /* Palette bleue pour les océans */
+            --retro-primary: #00d9ff;      /* Bleu cyan océan */
+            --retro-secondary: #0066ff;    /* Bleu profond */
+            --retro-accent: #00ffaa;       /* Vert aqua */
+            --retro-warning: #ffd700;      /* Or pour le soleil */
+            --retro-danger: #ff3366;       /* Corail rouge */
+        }
+
+        /* Effet vagues en arrière-plan */
+        .ocean-waves {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(180deg, transparent, rgba(0, 102, 255, 0.2));
+            z-index: 0;
+            animation: wave 4s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Poissons pixelisés animés */
+        .pixel-fish {
+            position: fixed;
+            font-size: 24px;
+            z-index: 500;
+            animation: swim 15s linear infinite;
+        }
+
+        @keyframes swim {
+            from {
+                left: -50px;
+                transform: translateY(0);
+            }
+            to {
+                left: 100vw;
+                transform: translateY(-20px);
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block header_title %}
+    <span class="retro-glitch" data-text="🌊 MISSION OCÉAN PIXEL 🌊">🌊 MISSION OCÉAN PIXEL 🌊</span>
+{% endblock %}
+
+{% block header_subtitle %}
+    SAUVEZ LES OCÉANS EN MODE 8-BIT
+    <br>
+    <span class="retro-blink">▶ NUIT DE L'INFO 2025 ◀</span>
+{% endblock %}
+
+{% block menu_items %}
+    <li class="retro-menu-item active">🏠 ACCUEIL</li>
+    <li class="retro-menu-item">🌊 OCÉANS</li>
+    <li class="retro-menu-item">🐟 BIODIVERSITÉ</li>
+    <li class="retro-menu-item">♻️ POLLUTION</li>
+    <li class="retro-menu-item">🎮 MINI-JEUX</li>
+    <li class="retro-menu-item">📊 STATS</li>
+{% endblock %}
+
+{% block main_content %}
+    {# Introduction mission #}
+    <div class="retro-card retro-float">
+        <h2 class="retro-subtitle">🎮 BRIEFING DE MISSION</h2>
+        <p class="retro-text retro-mb-2">
+            Agent {{ random(100, 999) }}, les océans sont en danger !
+            <br><br>
+            Votre mission : Apprendre, agir et protéger nos océans
+            dans cette aventure rétro gaming. Collectez des informations,
+            sauvez des espèces, et combattez la pollution pixel par pixel !
+        </p>
+        <button class="retro-button" onclick="alert('🎮 Mission acceptée ! Que l\'aventure commence!')">
+            ACCEPTER LA MISSION
+        </button>
+        <button class="retro-button secondary" onclick="alert('👾 Vous ne pouvez pas refuser!')">
+            REFUSER (LÂCHE!)
+        </button>
+    </div>
+
+    {# Statistiques océans #}
+    <div class="retro-card retro-mt-2">
+        <h2 class="retro-subtitle retro-center">📊 ÉTAT DES OCÉANS</h2>
+
+        <div class="retro-mb-2">
+            <p class="retro-text">🌊 Santé des océans:</p>
+            <div class="retro-progress-bar">
+                <div class="retro-progress-fill" id="ocean-health" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <div class="retro-mb-2">
+            <p class="retro-text">🐟 Biodiversité:</p>
+            <div class="retro-progress-bar">
+                <div class="retro-progress-fill" id="biodiversity" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <div class="retro-mb-2">
+            <p class="retro-text">♻️ Niveau de pollution:</p>
+            <div class="retro-progress-bar">
+                <div class="retro-progress-fill" id="pollution" style="width: 0%; background: repeating-linear-gradient(90deg, #ff3366, #ff3366 10px, #ff0040 10px, #ff0040 20px);"></div>
+            </div>
+        </div>
+
+        <div class="retro-center retro-mt-2">
+            <span class="retro-badge">ESPÈCES MENACÉES: 1,000+</span>
+            <span class="retro-badge">PLASTIQUE: 8M TONNES/AN</span>
+            <span class="retro-badge retro-blink">URGENT!</span>
+        </div>
+    </div>
+
+    {# Les menaces - Style Boss de jeu vidéo #}
+    <div class="retro-card retro-mt-2">
+        <h2 class="retro-subtitle retro-center">👾 BOSS À COMBATTRE 👾</h2>
+
+        <div class="retro-grid">
+            <div class="retro-card">
+                <h3 class="retro-subtitle">🗑️ BOSS: POLLUTION</h3>
+                <p class="retro-text">
+                    HP: ████████░░ 80%<br>
+                    ATK: Plastique<br>
+                    DEF: Négligence<br>
+                    <br>
+                    8 millions de tonnes de plastique sont déversées
+                    dans les océans chaque année !
+                </p>
+                <button class="retro-button" onclick="alert('💥 Attaque: Recyclage! -10 HP')">
+                    ATTAQUER
+                </button>
+            </div>
+
+            <div class="retro-card">
+                <h3 class="retro-subtitle">🌡️ BOSS: RÉCHAUFFEMENT</h3>
+                <p class="retro-text">
+                    HP: ██████████ 100%<br>
+                    ATK: CO2<br>
+                    DEF: Lobby pétrolier<br>
+                    <br>
+                    Les océans absorbent 90% de la chaleur du
+                    réchauffement climatique !
+                </p>
+                <button class="retro-button" onclick="alert('💨 Attaque: Énergies vertes! -5 HP')">
+                    ATTAQUER
+                </button>
+            </div>
+
+            <div class="retro-card">
+                <h3 class="retro-subtitle">🎣 BOSS: SURPÊCHE</h3>
+                <p class="retro-text">
+                    HP: ███████░░░ 70%<br>
+                    ATK: Chalutiers<br>
+                    DEF: Quotas dépassés<br>
+                    <br>
+                    33% des stocks de poissons sont surexploités
+                    dans le monde !
+                </p>
+                <button class="retro-button" onclick="alert('🛡️ Défense: Zones protégées! -15 HP')">
+                    ATTAQUER
+                </button>
+            </div>
+
+            <div class="retro-card">
+                <h3 class="retro-subtitle">🏭 BOSS: ACIDIFICATION</h3>
+                <p class="retro-text">
+                    HP: █████████░ 90%<br>
+                    ATK: pH killer<br>
+                    DEF: Inertie<br>
+                    <br>
+                    L'acidité des océans a augmenté de 30% depuis
+                    la révolution industrielle !
+                </p>
+                <button class="retro-button" onclick="alert('⚗️ Attaque: Capture carbone! -8 HP')">
+                    ATTAQUER
+                </button>
+            </div>
+        </div>
+    </div>
+
+    {# Héros à débloquer - Les espèces marines #}
+    <div class="retro-card retro-mt-2">
+        <h2 class="retro-subtitle retro-center">🦸 HÉROS À SAUVER</h2>
+        <p class="retro-text retro-center retro-mb-2">
+            Protégez ces espèces emblématiques pour débloquer des bonus !
+        </p>
+
+        <div class="retro-grid">
+            <div class="retro-card retro-center">
+                <div style="font-size: 3rem;">🐢</div>
+                <h3 class="retro-subtitle">TORTUE MARINE</h3>
+                <span class="retro-badge retro-blink">EN DANGER</span>
+            </div>
+
+            <div class="retro-card retro-center">
+                <div style="font-size: 3rem;">🐋</div>
+                <h3 class="retro-subtitle">BALEINE BLEUE</h3>
+                <span class="retro-badge">VULNÉRABLE</span>
+            </div>
+
+            <div class="retro-card retro-center">
+                <div style="font-size: 3rem;">🦈</div>
+                <h3 class="retro-subtitle">REQUIN</h3>
+                <span class="retro-badge">MENACÉ</span>
+            </div>
+
+            <div class="retro-card retro-center">
+                <div style="font-size: 3rem;">🐙</div>
+                <h3 class="retro-subtitle">POULPE</h3>
+                <span class="retro-badge" style="background: var(--retro-primary);">STABLE</span>
+            </div>
+
+            <div class="retro-card retro-center">
+                <div style="font-size: 3rem;">🐠</div>
+                <h3 class="retro-subtitle">POISSON CLOWN</h3>
+                <span class="retro-badge">VULNÉRABLE</span>
+            </div>
+
+            <div class="retro-card retro-center">
+                <div style="font-size: 3rem;">🦀</div>
+                <h3 class="retro-subtitle">CRABE</h3>
+                <span class="retro-badge" style="background: var(--retro-primary);">STABLE</span>
+            </div>
+        </div>
+    </div>
+
+    {# Mini-jeu / Quiz #}
+    <div class="retro-card retro-mt-2">
+        <h2 class="retro-subtitle">🎮 QUIZ OCÉAN - NIVEAU 1</h2>
+
+        <div class="retro-mb-2">
+            <span class="retro-badge">SCORE: 0</span>
+            <span class="retro-badge">VIES: ❤️❤️❤️</span>
+            <span class="retro-badge">NIVEAU: 1</span>
+        </div>
+
+        <p class="retro-text retro-mb-2">
+            <strong>QUESTION:</strong><br>
+            Quelle est la profondeur maximale de l'océan ?
+        </p>
+
+        <button class="retro-button retro-mb-1" style="display: block; width: 100%;"
+                onclick="alert('❌ FAUX! -1 vie')">
+            A) 5,000 mètres
+        </button>
+        <button class="retro-button retro-mb-1" style="display: block; width: 100%;"
+                onclick="alert('✅ CORRECT! +100 points\nFosse des Mariannes: 11,034m')">
+            B) 11,000 mètres
+        </button>
+        <button class="retro-button retro-mb-1" style="display: block; width: 100%;"
+                onclick="alert('❌ FAUX! -1 vie')">
+            C) 20,000 mètres
+        </button>
+        <button class="retro-button" style="display: block; width: 100%;"
+                onclick="alert('❌ FAUX! -1 vie')">
+            D) 8,000 mètres
+        </button>
+    </div>
+
+    {# Tableau des scores #}
+    <div class="retro-card retro-mt-2">
+        <h2 class="retro-subtitle retro-center">🏆 HIGH SCORES 🏆</h2>
+
+        <div class="retro-console">
+            <div class="retro-console-line" style="color: #ffd700;">1ST  AAA .......... 999,999</div>
+            <div class="retro-console-line" style="color: #c0c0c0;">2ND  ECO .......... 888,888</div>
+            <div class="retro-console-line" style="color: #cd7f32;">3RD  SEA .......... 777,777</div>
+            <div class="retro-console-line">4TH  OCE .......... 666,666</div>
+            <div class="retro-console-line">5TH  H2O .......... 555,555</div>
+            <div class="retro-console-line">6TH  BLU .......... 444,444</div>
+            <div class="retro-console-line">7TH  WAV .......... 333,333</div>
+            <div class="retro-console-line">8TH  FIS .......... 222,222</div>
+            <div class="retro-console-line">9TH  CRL .......... 111,111</div>
+            <div class="retro-console-line">10TH YOU .......... 000,000</div>
+        </div>
+
+        <div class="retro-center retro-mt-2">
+            <p class="retro-text retro-blink">ENTER YOUR NAME:</p>
+            <input type="text"
+                   maxlength="3"
+                   placeholder="___"
+                   style="width: 100px;
+                          padding: 10px;
+                          background: var(--retro-dark);
+                          border: 3px solid var(--retro-primary);
+                          color: var(--retro-primary);
+                          font-family: var(--font-pixel);
+                          font-size: 1.5rem;
+                          text-align: center;">
+        </div>
+    </div>
+
+    {# Achievements #}
+    <div class="retro-card retro-mt-2">
+        <h2 class="retro-subtitle retro-center">🎖️ ACHIEVEMENTS</h2>
+
+        <div class="retro-grid">
+            <div class="retro-card retro-center">
+                <div style="font-size: 2rem;">🏆</div>
+                <p class="retro-text">FIRST STEPS</p>
+                <small class="retro-text">Visitez le site</small>
+            </div>
+
+            <div class="retro-card retro-center" style="opacity: 0.5;">
+                <div style="font-size: 2rem;">🌊</div>
+                <p class="retro-text">OCEAN MASTER</p>
+                <small class="retro-text">Terminez tous les niveaux</small>
+            </div>
+
+            <div class="retro-card retro-center" style="opacity: 0.5;">
+                <div style="font-size: 2rem;">💯</div>
+                <p class="retro-text">PERFECT SCORE</p>
+                <small class="retro-text">100% au quiz</small>
+            </div>
+
+            <div class="retro-card retro-center">
+                <div style="font-size: 2rem;">🎮</div>
+                <p class="retro-text">KONAMI CODE</p>
+                <small class="retro-text">Découvrez le secret!</small>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_content %}
+    {# Éléments décoratifs animés #}
+    <div class="ocean-waves"></div>
+    <div class="pixel-fish" style="top: 20%;">🐟</div>
+    <div class="pixel-fish" style="top: 40%; animation-delay: -5s; animation-duration: 20s;">🐠</div>
+    <div class="pixel-fish" style="top: 60%; animation-delay: -10s; animation-duration: 25s;">🐡</div>
+{% endblock %}
+
+{% block footer_text %}
+    <span class="retro-blink">█</span> SAUVEZ LES OCÉANS, UN PIXEL À LA FOIS <span class="retro-blink">█</span>
+    <br>
+    <small style="font-size: 0.6rem;">
+        NUIT DE L'INFO 2025 - DÉFI IUTLCO<br>
+        "ON VEUT DU GROS PIXEL!" ✨🎮👾🕹️
+    </small>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animer les barres de progression
+            setTimeout(() => {
+                if (window.retroGaming) {
+                    retroGaming.animateProgressBar('#ocean-health', 65, 2000);
+                }
+            }, 500);
+
+            setTimeout(() => {
+                if (window.retroGaming) {
+                    retroGaming.animateProgressBar('#biodiversity', 58, 2000);
+                }
+            }, 1000);
+
+            setTimeout(() => {
+                if (window.retroGaming) {
+                    retroGaming.animateProgressBar('#pollution', 85, 2000);
+                }
+            }, 1500);
+
+            // Message de bienvenue thématique
+            setTimeout(() => {
+                if (window.retroGaming) {
+                    retroGaming.showNotification('🌊 BIENVENUE AGENT OCÉAN! 🌊', 'success');
+                }
+            }, 2000);
+
+            // Easter egg personnalisé
+            let fishClicks = 0;
+            document.querySelectorAll('.pixel-fish').forEach(fish => {
+                fish.addEventListener('click', function() {
+                    fishClicks++;
+                    if (window.retroGaming) {
+                        retroGaming.createParticles(event.clientX, event.clientY, 15);
+                        retroGaming.showNotification(`🐟 Poisson ${fishClicks} attrapé!`, 'success');
+                    }
+                    if (fishClicks >= 3) {
+                        alert('🏆 ACHIEVEMENT DÉBLOQUÉ: PÊCHEUR PIXEL!\n+1000 points');
+                        fishClicks = 0;
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}
