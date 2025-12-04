@@ -1,0 +1,583 @@
+/* === IMPORT POLICE PIXEL ART === */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* ===================================
+   RETRO GAMING PIXEL ART THEME
+   Nuit de l'Info 2025 - Défi IUTLCO
+   =================================== */
+
+/* === VARIABLES CSS === */
+:root {
+    /* Palette de couleurs rétro */
+    --retro-bg: #0f0f1e;
+    --retro-primary: #00ff41;
+    --retro-secondary: #ff00ff;
+    --retro-accent: #00ffff;
+    --retro-warning: #ffff00;
+    --retro-danger: #ff0040;
+    --retro-white: #ffffff;
+    --retro-gray: #808080;
+    --retro-dark: #1a1a2e;
+
+    /* Polices pixel art */
+    --font-pixel: 'Press Start 2P', 'Courier New', monospace;
+
+    /* Animations */
+    --blink-speed: 1s;
+    --scan-speed: 4s;
+}
+
+/* === MODE RETRO ACTIVÉ === */
+.retro-mode {
+    background: var(--retro-bg);
+    color: var(--retro-primary);
+    font-family: var(--font-pixel);
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* === EFFET SCANLINES CRT === */
+.retro-mode::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    z-index: 1000;
+    animation: scan var(--scan-speed) linear infinite;
+}
+
+/* === EFFET ÉCRAN CRT === */
+.retro-mode::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+    pointer-events: none;
+    z-index: 999;
+}
+
+@keyframes scan {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(10px); }
+}
+
+/* === CONTENEUR PRINCIPAL === */
+.retro-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* === BORDURE PIXEL ART === */
+.retro-border {
+    border: 4px solid var(--retro-primary);
+    box-shadow:
+        0 0 10px var(--retro-primary),
+        inset 0 0 10px rgba(0, 255, 65, 0.2);
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+/* === TITRES RÉTRO === */
+.retro-title {
+    font-size: 2rem;
+    color: var(--retro-accent);
+    text-shadow:
+        3px 3px 0 var(--retro-secondary),
+        6px 6px 0 rgba(0, 0, 0, 0.5);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    line-height: 1.5;
+}
+
+.retro-subtitle {
+    font-size: 1rem;
+    color: var(--retro-primary);
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+    margin-bottom: 1rem;
+    line-height: 1.8;
+}
+
+.retro-text {
+    font-size: 0.8rem;
+    line-height: 2;
+    color: var(--retro-white);
+}
+
+/* === BOUTONS PIXEL ART === */
+.retro-button {
+    font-family: var(--font-pixel);
+    font-size: 0.8rem;
+    padding: 15px 30px;
+    background: var(--retro-primary);
+    color: var(--retro-dark);
+    border: 4px solid var(--retro-primary);
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.1s;
+    box-shadow:
+        4px 4px 0 rgba(0, 0, 0, 0.5),
+        0 0 10px var(--retro-primary);
+    position: relative;
+}
+
+.retro-button:hover {
+    background: var(--retro-dark);
+    color: var(--retro-primary);
+    transform: translate(2px, 2px);
+    box-shadow:
+        2px 2px 0 rgba(0, 0, 0, 0.5),
+        0 0 20px var(--retro-primary);
+}
+
+.retro-button:active {
+    transform: translate(4px, 4px);
+    box-shadow: none;
+}
+
+/* === VARIANTES DE BOUTONS === */
+.retro-button.secondary {
+    background: var(--retro-secondary);
+    border-color: var(--retro-secondary);
+    box-shadow:
+        4px 4px 0 rgba(0, 0, 0, 0.5),
+        0 0 10px var(--retro-secondary);
+}
+
+.retro-button.secondary:hover {
+    color: var(--retro-secondary);
+    box-shadow:
+        2px 2px 0 rgba(0, 0, 0, 0.5),
+        0 0 20px var(--retro-secondary);
+}
+
+/* === CARTES PIXEL ART === */
+.retro-card {
+    background: rgba(0, 0, 0, 0.8);
+    border: 4px solid var(--retro-primary);
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow:
+        8px 8px 0 rgba(0, 255, 65, 0.3),
+        0 0 20px rgba(0, 255, 65, 0.2);
+}
+
+.retro-card:hover {
+    border-color: var(--retro-accent);
+    box-shadow:
+        8px 8px 0 rgba(0, 255, 255, 0.3),
+        0 0 30px rgba(0, 255, 255, 0.4);
+    transform: translate(-2px, -2px);
+}
+
+/* === BADGES/SCORES === */
+.retro-badge {
+    display: inline-block;
+    padding: 10px 20px;
+    background: var(--retro-dark);
+    border: 3px solid var(--retro-warning);
+    color: var(--retro-warning);
+    font-size: 0.7rem;
+    box-shadow: 0 0 10px var(--retro-warning);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* === EFFET BLINK === */
+.retro-blink {
+    animation: blink var(--blink-speed) infinite;
+}
+
+@keyframes blink {
+    0%, 49%, 100% { opacity: 1; }
+    50%, 99% { opacity: 0; }
+}
+
+/* === PIXEL ART SPRITES === */
+.retro-sprite {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+/* === BARRE DE VIE/PROGRESSION === */
+.retro-progress-bar {
+    width: 100%;
+    height: 30px;
+    background: var(--retro-dark);
+    border: 3px solid var(--retro-primary);
+    position: relative;
+    overflow: hidden;
+}
+
+.retro-progress-fill {
+    height: 100%;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--retro-primary),
+        var(--retro-primary) 10px,
+        var(--retro-accent) 10px,
+        var(--retro-accent) 20px
+    );
+    transition: width 0.3s;
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* === MENU PIXEL ART === */
+.retro-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.retro-menu-item {
+    padding: 15px 20px;
+    margin: 5px 0;
+    background: var(--retro-dark);
+    border: 3px solid var(--retro-primary);
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+.retro-menu-item:hover,
+.retro-menu-item.active {
+    background: var(--retro-primary);
+    color: var(--retro-dark);
+    transform: translateX(10px);
+}
+
+.retro-menu-item::before {
+    content: '▶ ';
+    opacity: 0;
+    transition: opacity 0.1s;
+}
+
+.retro-menu-item:hover::before,
+.retro-menu-item.active::before {
+    opacity: 1;
+}
+
+/* === GRILLE PIXEL === */
+.retro-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+/* === ANIMATIONS PIXEL === */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.retro-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* === EFFETS DE TEXTE === */
+.retro-glitch {
+    position: relative;
+}
+
+.retro-glitch::before,
+.retro-glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.retro-glitch::before {
+    animation: glitch-1 0.3s infinite;
+    color: var(--retro-secondary);
+    z-index: -1;
+}
+
+.retro-glitch::after {
+    animation: glitch-2 0.3s infinite;
+    color: var(--retro-accent);
+    z-index: -2;
+}
+
+@keyframes glitch-1 {
+    0%, 100% { transform: translate(0); }
+    33% { transform: translate(-2px, 2px); }
+    66% { transform: translate(2px, -2px); }
+}
+
+@keyframes glitch-2 {
+    0%, 100% { transform: translate(0); }
+    33% { transform: translate(2px, -2px); }
+    66% { transform: translate(-2px, 2px); }
+}
+
+/* === MESSAGE TYPE CONSOLE === */
+.retro-console {
+    background: #000;
+    border: 4px solid var(--retro-primary);
+    padding: 20px;
+    font-family: 'Courier New', monospace;
+    color: var(--retro-primary);
+    overflow-y: auto;
+    max-height: 300px;
+}
+
+.retro-console-line {
+    margin: 5px 0;
+}
+
+.retro-console-line::before {
+    content: '> ';
+    color: var(--retro-accent);
+}
+
+/* === CONSOLE INTERACTIVE LINUX === */
+.linux-terminal {
+    background: #000;
+    border: 4px solid var(--retro-primary);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.5), inset 0 0 20px rgba(0, 255, 65, 0.1);
+    padding: 0;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: var(--retro-primary);
+    margin: 20px 0;
+    max-width: 100%;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.terminal-header {
+    background: var(--retro-dark);
+    border-bottom: 2px solid var(--retro-primary);
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.terminal-button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.terminal-button.close { background: #ff5f56; }
+.terminal-button.minimize { background: #ffbd2e; }
+.terminal-button.maximize { background: #27c93f; }
+
+.terminal-title {
+    flex: 1;
+    text-align: center;
+    color: var(--retro-primary);
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.terminal-body {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.terminal-output {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.terminal-line {
+    margin: 5px 0;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.terminal-line.command {
+    color: var(--retro-accent);
+}
+
+.terminal-line.output {
+    color: var(--retro-primary);
+}
+
+.terminal-line.error {
+    color: var(--retro-danger);
+}
+
+.terminal-line.warning {
+    color: var(--retro-warning);
+}
+
+.terminal-line.success {
+    color: #27c93f;
+}
+
+.terminal-prompt {
+    color: var(--retro-secondary);
+    font-weight: bold;
+}
+
+.terminal-input-line {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.terminal-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--retro-primary);
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    outline: none;
+    caret-color: var(--retro-primary);
+}
+
+.terminal-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 16px;
+    background: var(--retro-primary);
+    animation: cursor-blink 1s infinite;
+}
+
+@keyframes cursor-blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+}
+
+/* Style du scrollbar pour la console */
+.terminal-output::-webkit-scrollbar,
+.terminal-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.terminal-output::-webkit-scrollbar-track,
+.terminal-body::-webkit-scrollbar-track {
+    background: var(--retro-dark);
+}
+
+.terminal-output::-webkit-scrollbar-thumb,
+.terminal-body::-webkit-scrollbar-thumb {
+    background: var(--retro-primary);
+    border-radius: 4px;
+}
+
+.terminal-output::-webkit-scrollbar-thumb:hover,
+.terminal-body::-webkit-scrollbar-thumb:hover {
+    background: var(--retro-accent);
+}
+
+/* === ÉTOILES DE FOND ANIMÉES === */
+.retro-stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.retro-star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--retro-white);
+    animation: twinkle 3s infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    .retro-title {
+        font-size: 1.2rem;
+    }
+
+    .retro-subtitle {
+        font-size: 0.8rem;
+    }
+
+    .retro-text {
+        font-size: 0.6rem;
+    }
+
+    .retro-button {
+        font-size: 0.6rem;
+        padding: 10px 20px;
+    }
+
+    .retro-container {
+        padding: 10px;
+    }
+}
+
+/* === UTILITAIRES === */
+.retro-center {
+    text-align: center;
+}
+
+.retro-mt-1 { margin-top: 1rem; }
+.retro-mt-2 { margin-top: 2rem; }
+.retro-mt-3 { margin-top: 3rem; }
+
+.retro-mb-1 { margin-bottom: 1rem; }
+.retro-mb-2 { margin-bottom: 2rem; }
+.retro-mb-3 { margin-bottom: 3rem; }
+
+.retro-p-1 { padding: 1rem; }
+.retro-p-2 { padding: 2rem; }
+.retro-p-3 { padding: 3rem; }
+
+/* === GAME OVER SCREEN === */
+.retro-game-over {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    text-align: center;
+}
+
+.retro-game-over h1 {
+    font-size: 3rem;
+    color: var(--retro-danger);
+    animation: blink 0.5s infinite;
+}
