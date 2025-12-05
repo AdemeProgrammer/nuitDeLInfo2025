@@ -10,32 +10,34 @@
 
 {% block header_subtitle %}PULGA - MODE RETRO GAMING ACTIVÉ{% endblock %}
 
-{% block main_content%}
-<div class="retro-card retro-float">
-    <h2 class="retro-subtitle">🎮 NIRD — Insert Coin for a Better Digital World </h2>
-    <p class="retro-text retro-mb-2">
-        Welcome Player 1 !
-        Tu viens de démarquer dans la Zone NIRD, un niveau spécial où le numérique scolaire devient plus juste, plus écolo et beaucoup plus fun.
+{% block main_content %}
+    <div class="retro-card retro-float">
+        <h2 class="retro-subtitle">🎮 NIRD — Insert Coin for a Better Digital World </h2>
+        <p class="retro-text retro-mb-2">
+            Welcome Player 1 !
+            Tu viens de démarquer dans la Zone NIRD, un niveau spécial où le numérique scolaire devient plus juste, plus
+            écolo et beaucoup plus fun.
 
-        Ici, pas question de gaspiller des ressources ou de laisser certains élèves hors-jeu :
+            Ici, pas question de gaspiller des ressources ou de laisser certains élèves hors-jeu :
 
-        🟦 Inclusif — Tout le monde a une manette. Et elle fonctionne !
+            🟦 Inclusif — Tout le monde a une manette. Et elle fonctionne !
 
-        🟩 Responsable — On joue fair-play : logiciels libres, transparence, respect des données.
+            🟩 Responsable — On joue fair-play : logiciels libres, transparence, respect des données.
 
-        🟧 Durable — On répare, on reconditionne, on optimise… Game Over pour l’obsolescence rapide.
+            🟧 Durable — On répare, on reconditionne, on optimise… Game Over pour l’obsolescence rapide.
 
-        Prêt·e à explorer l’univers NIRD ?
-        Collecte des power-ups 💾, découvre des quêtes pédagogiques, et rejoins la team qui construit un numérique scolaire plus cool et plus durable.
+            Prêt·e à explorer l’univers NIRD ?
+            Collecte des power-ups 💾, découvre des quêtes pédagogiques, et rejoins la team qui construit un numérique
+            scolaire plus cool et plus durable.
 
-        👉 Press START to begin the adventure.
-    </p>
+            👉 Press START to begin the adventure.
+        </p>
 
-    <div class="retro-progress-bar retro-mb-1">
-        <div class="retro-progress-fill" style="width: 85%"></div>
+        <div class="retro-progress-bar retro-mb-1">
+            <div class="retro-progress-fill" style="width: 85%"></div>
+        </div>
+        <p class="retro-text retro-center">PIXEL POWER: 85%</p>
     </div>
-    <p class="retro-text retro-center">PIXEL POWER: 85%</p>
-</div>
     <div class="retro-card">
         <h2 class="retro-subtitle">🎮 TERMINAL INTERACTIF</h2>
         <p class="retro-text">
@@ -78,7 +80,8 @@
         <h3 class="retro-subtitle">⚙️ PERSONNALISATION</h3>
         <div class="retro-text">
             <p>Vous pouvez facilement ajouter vos propres commandes:</p>
-            <div style="background: #000; border: 2px solid #00ff41; padding: 15px; margin-top: 10px; font-family: 'Courier New', monospace; font-size: 12px;">
+            <div
+                style="background: #000; border: 2px solid #00ff41; padding: 15px; margin-top: 10px; font-family: 'Courier New', monospace; font-size: 12px;">
                 // Ajouter une nouvelle commande<br>
                 terminal.addCommand('macommande', function(args) {<br>
                 &nbsp;&nbsp;this.print('Ma commande fonctionne!', 'success');<br>
@@ -90,6 +93,89 @@
         </div>
     </div>
 {% endblock %}
+{% block extra_content %}
+    <div class="retro-card">
+        <h2 class="retro-subtitle">🎮 LE VOL DE DONNEES</h2>
+        <p class="retro-text retro-mb-2">
+            Agent {{ random(100, 999) }}, Vos données sont en danger !
+            <br><br>
+            Aujourd’hui, les écoles utilisent beaucoup d’outils numériques pour travailler. Mais quand ces outils
+            appartiennent à de grandes entreprises, les informations des élèves et des enseignants peuvent être stockées
+            très loin, parfois même hors d’Europe.
+
+            Cela peut devenir dangereux : des pirates peuvent voler ces données, les entreprises peuvent les utiliser
+            sans demander vraiment l’avis, et personne ne sait toujours où elles sont gardées.
+
+            Avec la démarche NIRD, les établissements peuvent choisir des solutions plus sûres, plus simples et plus
+            transparentes. L’objectif : garder le contrôle sur ses données et protéger tout le monde.
+        </p>
+        <button class="retro-button" onclick="window.location.href='{{ path('app_virus') }}';" type="button">
+            EN SAVOIR PLUS
+        </button>
+        <button class="retro-button secondary" onclick="alert('👾 Vous ne pouvez pas refuser!')">
+            NE PAS SAVOIR (INCULTE!)
+        </button>
+    </div>
+
+    <div class="retro-card">
+        <h2 class="retro-subtitle">🎮 PASSER VERS LA LUMIERE</h2>
+        <p class="retro-text retro-mb-2">
+            Pour nous sauver, des griffes des ces entreprises, Les logicielle et systeme Open Source sont la.
+            Pour nous sauver des griffes de ces entreprises, les logiciels et systèmes Open Source sont là.
+
+            Ces outils sont différents : ils sont libres, gratuits et souvent développés par des communautés de
+            personnes passionnées. Contrairement aux services des grandes entreprises, l’open source permet de savoir
+            exactement ce que fait un logiciel, où sont stockées les données et qui peut y accéder.
+
+            Avec des alternatives open source, les écoles peuvent continuer à travailler avec des outils numériques tout
+            en gardant le contrôle : </p>
+
+        <ul class="retro-text retro-mb-2">
+            <li> Systèmes d’exploitation : <a href="https://www.linux.org/">Linux (Ubuntu, Debian)</a></li>
+
+            <li>Bureautique : <a href="https://fr.libreoffice.org/about-us/who-are-we/">LibreOffice</a></li>
+
+            <li>Cloud et stockage : <a href="https://nextcloud.com/about/">Nextcloud</a></li>
+
+            <li>Messagerie : <a href="https://www.thunderbird.net/fr/about/">Thunderbird</a>, <a href="https://support.signal.org/hc/fr">Signal</a></li>
+
+            <li>Recherche sur Internet : <a href="https://duckduckgo.com/app?origin=funnel_home_bing">DuckDuckGo</a></li>
+        </ul>
+        <p class="retro-text retro-mb-2"> En utilisant ces outils, les écoles protègent les données des élèves et des enseignants et contribuent à un
+            environnement numérique plus sûr et plus transparent.
+
+        </p>
+    </div>
+
+    <div class="retro-card">
+        <h2 class="retro-subtitle">🎮 DE CARTES MERE ET D'OS</h2>
+        <p class="retro-text retro-mb-2">
+            Pour nous équiper contre l’ennemi, nous devons conquérir l’obsolescence programmée.
+
+            Aujourd’hui, beaucoup d’objets électroniques et logiciels sont conçus pour s’user ou devenir inutilisables rapidement. C’est ce qu’on appelle l’obsolescence programmée. Cela signifie que certains appareils ou logiciels ne sont pas faits pour durer : ils tombent en panne, deviennent trop lents ou ne reçoivent plus de mises à jour. Résultat : il faut les remplacer souvent, ce qui coûte de l’argent et pollue la planète.
+
+            Grâce à la démarche NIRD, les écoles et établissements peuvent choisir des solutions plus durables et transparentes. Cela passe par des logiciels libres, des appareils réparables et des outils qui évoluent sans obliger à changer de matériel. Avec cette approche, il est possible de :</p>
+        <ul class="retro-text retro-mb-2">
+           <li> Réparer plutôt que jeter</li>
+
+            <li> Utiliser des logiciels open source qui durent et restent sûrs</li>
+
+            <li> Réduire les déchets électroniques et protéger l’environnement</li>
+    </ul>
+        <p class="retro-text retro-mb-2">
+
+            En suivant NIRD, chacun garde le contrôle de ses outils numériques tout en faisant des choix responsables et durables.
+        </p>
+        <button class="retro-button" onclick="window.location.href='https://www.youtube.com/watch?v=S6GLqkhykmA';">
+            VOIR LA VIDEO
+        </button>
+        <button class="retro-button secondary" onclick="alert('👾 Je vois pas pourquoi vous cliqué!')">
+            NE PAS VOIR LA VIDEO
+        </button>
+    </div>
+
+{% endblock %}
+
 {% block footer %}
     <footer class="retro-border retro-mt-3">
         <div class="retro-center">
@@ -100,7 +186,7 @@
                     © 2025 — PULGA
                     Code source publié sous licence
                     <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank">AGPLv3</a>
-            {% endblock %}
+                {% endblock %}
             </p>
             <div class="retro-mt-1">
                 <span class="retro-badge">SCORE: 9999</span>
@@ -125,7 +211,7 @@
     <script src="{{ asset('js/tetris-game.js') }}"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Initialiser le terminal avec des options personnalisées
             const terminal = new LinuxTerminal('terminal-container', {
                 username: 'hacker',
@@ -163,12 +249,12 @@ Essayez 'rien' pour une surprise... 😉
             window.scrollTo(0, 0);
 
             // Ajouter des commandes personnalisées supplémentaires
-            terminal.addCommand('bonjour', function(args) {
+            terminal.addCommand('bonjour', function (args) {
                 const name = args[0] || 'visiteur';
                 this.print(`👋 Salut ${name}! Bienvenue à la Nuit de l'Info!`, 'success');
             });
 
-            terminal.addCommand('score', function(args) {
+            terminal.addCommand('score', function (args) {
                 this.print('🏆 TABLEAU DES SCORES 🏆', 'warning');
                 this.print('─────────────────────────────', 'output');
                 this.print('1. Player1 .......... 9999', 'success');
@@ -177,7 +263,7 @@ Essayez 'rien' pour une surprise... 😉
                 this.print('─────────────────────────────', 'output');
             });
 
-            terminal.addCommand('easteregg', function(args) {
+            terminal.addCommand('easteregg', function (args) {
                 this.print('🥚 Vous avez trouvé un Easter Egg!', 'success');
                 this.print('', 'output');
                 const egg = `
@@ -193,7 +279,7 @@ Essayez 'rien' pour une surprise... 😉
                 this.print('🎁 Félicitations! +100 points bonus!', 'success');
             });
 
-            terminal.addCommand('about', function(args) {
+            terminal.addCommand('about', function (args) {
                 this.print('', 'output');
                 this.print('╔═══════════════════════════════════════════════╗', 'success');
                 this.print('║                                               ║', 'success');
@@ -210,7 +296,7 @@ Essayez 'rien' pour une surprise... 😉
                 this.print('', 'output');
             });
 
-            terminal.addCommand('fortune', function(args) {
+            terminal.addCommand('fortune', function (args) {
                 const fortunes = [
                     '🔮 Votre code compilera du premier coup demain... ou pas.',
                     '🔮 Un bug se cache dans votre code. Cherchez bien!',
@@ -225,7 +311,7 @@ Essayez 'rien' pour une surprise... 😉
                 this.print(random, 'warning');
             });
 
-            terminal.addCommand('cowsay', function(args) {
+            terminal.addCommand('cowsay', function (args) {
                 const message = args.join(' ') || 'Moo!';
                 const cow = `
  ${'-'.repeat(message.length + 2)}
@@ -306,7 +392,7 @@ Essayez 'rien' pour une surprise... 😉
             let formActive = false;
             let currentQuestion = null;
 
-            terminal.addCommand('rep', function(args) {
+            terminal.addCommand('rep', function (args) {
                 if (!formActive) {
                     this.print("⚠ Aucune question en cours. Tape 'form' pour commencer.");
                     return;
@@ -314,7 +400,7 @@ Essayez 'rien' pour une surprise... 😉
 
                 const rep = (args[0] || "").trim().toUpperCase();
 
-                if (!["A","B","C","D"].includes(rep)) {
+                if (!["A", "B", "C", "D"].includes(rep)) {
                     this.print("⚠ Réponse invalide. Tape : rep A | rep B | rep C | rep D");
                     return;
                 }
@@ -334,7 +420,7 @@ Essayez 'rien' pour une surprise... 😉
                 nextQuestion.call(this);
             });
 
-            terminal.addCommand('form', function(args) {
+            terminal.addCommand('form', function (args) {
                 const questionnaire = {
                     version: "1.1",
                     language: "fr",
@@ -828,7 +914,7 @@ Essayez 'rien' pour une surprise... 😉
                 let index = 0;
                 formActive = true;
 
-                nextQuestion = function() {
+                nextQuestion = function () {
 
                     if (index >= questionnaire.questions.length) {
                         this.print("🎉 Fin du questionnaire !");
