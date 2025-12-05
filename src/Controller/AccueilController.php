@@ -18,9 +18,5 @@ final class AccueilController extends AbstractController
     {
         return $this->render('accueil/accueil.html.twig');
     }
-    #[Route('/virus', name: 'app_virus')]
-    public function buttonVirus(): Response
-    {
-       return $this->render('accueil/virus.html.twig');
-    }
+
 }
