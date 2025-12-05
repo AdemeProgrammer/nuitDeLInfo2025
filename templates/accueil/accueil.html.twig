@@ -238,6 +238,565 @@ Essayez 'rien' pour une surprise... 😉
 `;
                 this.print(cow, 'output');
             });
+            let formActive = false;
+            let currentQuestion = null;
+
+            terminal.addCommand('rep', function(args) {
+                if (!formActive) {
+                    this.print("⚠ Aucune question en cours. Tape 'form' pour commencer.");
+                    return;
+                }
+
+                const rep = (args[0] || "").trim().toUpperCase();
+
+                if (!["A","B","C","D"].includes(rep)) {
+                    this.print("⚠ Réponse invalide. Tape : rep A | rep B | rep C | rep D");
+                    return;
+                }
+
+                const q = currentQuestion;
+
+                if (rep === q.correct) {
+                    this.print("🟩 ✓ Bonne réponse !");
+                } else {
+                    this.print("🟥 ✘ Mauvaise réponse !");
+                    this.print("☑ La bonne réponse était : " + q.correct);
+                }
+
+                this.print("ⓘ " + q.explanation);
+                this.print("──────────────────────────");
+
+                nextQuestion.call(this);
+            });
+
+            terminal.addCommand('form', function(args) {
+                const questionnaire = {
+                    version: "1.1",
+                    language: "fr",
+                    title: "Numérique Responsable & NIRD - QCM (40 questions avec explications)",
+                    questions: [
+                        {
+                            id: 1,
+                            question: "Que signifie l'acronyme NIRD ?",
+                            options: {
+                                A: "Numérique Innovant et Rapide Durable",
+                                B: "Numérique Inclusif, Responsable et Durable",
+                                C: "Numérique International Responsable Digital",
+                                D: "Nouveau Informatique Responsable Direct"
+                            },
+                            correct: "B",
+                            explanation: "NIRD signifie Numérique Inclusif, Responsable et Durable. Cela correspond aux trois valeurs centrales du projet."
+                        },
+                        {
+                            id: 2,
+                            question: "Quel est l'objectif principal de la démarche NIRD ?",
+                            options: {
+                                A: "Acheter plus d'ordinateurs",
+                                B: "Réduire la dépendance aux Big Tech",
+                                C: "Supprimer Internet",
+                                D: "Augmenter les abonnements numériques"
+                            },
+                            correct: "B",
+                            explanation: "Le but de NIRD est de rendre les établissements plus autonomes face aux grandes entreprises du numérique."
+                        },
+                        {
+                            id: 3,
+                            question: "Quel système d'exploitation est favorisé par NIRD ?",
+                            options: {
+                                A: "Windows",
+                                B: "macOS",
+                                C: "Linux",
+                                D: "iOS"
+                            },
+                            correct: "C",
+                            explanation: "Linux est un système libre, gratuit et durable, adapté aux objectifs du numérique responsable."
+                        },
+                        {
+                            id: 4,
+                            question: "Que signifie « obsolescence programmée » ?",
+                            options: {
+                                A: "Un appareil réparable facilement",
+                                B: "Un appareil prévu pour durer longtemps",
+                                C: "Un appareil conçu pour tomber en panne rapidement",
+                                D: "Un appareil open source"
+                            },
+                            correct: "C",
+                            explanation: "L’obsolescence programmée consiste à limiter volontairement la durée de vie d’un appareil."
+                        },
+                        {
+                            id: 5,
+                            question: "Pourquoi certaines écoles doivent changer d'ordinateur alors qu'ils fonctionnent encore ?",
+                            options: {
+                                A: "À cause des mises à jour système",
+                                B: "À cause des élèves",
+                                C: "À cause du Wi-Fi",
+                                D: "À cause de la météo"
+                            },
+                            correct: "A",
+                            explanation: "Les nouvelles versions de logiciels ne sont parfois plus compatibles avec les anciens ordinateurs."
+                        },
+                        {
+                            id: 6,
+                            question: "Le numérique responsable cherche surtout à :",
+                            options: {
+                                A: "Consommer plus",
+                                B: "Consommer mieux",
+                                C: "Consommer plus vite",
+                                D: "Supprimer la technologie"
+                            },
+                            correct: "B",
+                            explanation: "Le numérique responsable vise à réduire les impacts écologiques tout en gardant les usages utiles."
+                        },
+                        {
+                            id: 7,
+                            question: "Quel est l'un des trois piliers de la démarche NIRD ?",
+                            options: {
+                                A: "Performance",
+                                B: "Inclusion",
+                                C: "Rentabilité",
+                                D: "Rapidité"
+                            },
+                            correct: "B",
+                            explanation: "Les trois piliers sont Inclusion, Responsabilité et Durabilité."
+                        },
+                        {
+                            id: 8,
+                            question: "Le stockage des données hors de l'Union Européenne pose surtout un problème de :",
+                            options: {
+                                A: "Couleur",
+                                B: "Sécurité des données",
+                                C: "Vitesse de connexion",
+                                D: "Design"
+                            },
+                            correct: "B",
+                            explanation: "Les lois hors UE peuvent être moins protectrices pour les données personnelles."
+                        },
+                        {
+                            id: 9,
+                            question: "Qu'est-ce qu'un logiciel libre ?",
+                            options: {
+                                A: "Un logiciel toujours gratuit",
+                                B: "Un logiciel dont on peut modifier le code",
+                                C: "Un logiciel bloqué",
+                                D: "Un logiciel sans mise à jour"
+                            },
+                            correct: "B",
+                            explanation: "Un logiciel libre permet d’accéder, modifier et partager son code."
+                        },
+                        {
+                            id: 10,
+                            question: "Que signifie le réemploi du matériel ?",
+                            options: {
+                                A: "Jeter les appareils",
+                                B: "Réutiliser le matériel existant",
+                                C: "Acheter uniquement du neuf",
+                                D: "Stocker sans utiliser"
+                            },
+                            correct: "B",
+                            explanation: "Le réemploi permet de limiter les déchets électroniques."
+                        },
+
+                        {
+                            id: 11,
+                            question: "Quel acteur peut participer à NIRD ?",
+                            options: {
+                                A: "Les élèves seulement",
+                                B: "Les enseignants seulement",
+                                C: "Tous les acteurs éducatifs",
+                                D: "Seulement le ministère"
+                            },
+                            correct: "C",
+                            explanation: "Élèves, enseignants, directions, techniciens et collectivités peuvent tous contribuer."
+                        },
+                        {
+                            id: 12,
+                            question: "Pourquoi utiliser Linux à l'école ?",
+                            options: {
+                                A: "Pour jouer",
+                                B: "Pour réduire les coûts et prolonger la durée du matériel",
+                                C: "Pour remplacer Internet",
+                                D: "Pour bloquer les utilisateurs"
+                            },
+                            correct: "B",
+                            explanation: "Linux est gratuit et fonctionne même sur de vieux ordinateurs."
+                        },
+                        {
+                            id: 13,
+                            question: "Qu'est-ce qu'un éco-délégué ?",
+                            options: {
+                                A: "Un informaticien",
+                                B: "Un élève engagé pour l'environnement",
+                                C: "Un surveillant",
+                                D: "Un développeur"
+                            },
+                            correct: "B",
+                            explanation: "Les éco-délégués mènent des actions écologiques dans l’établissement."
+                        },
+                        {
+                            id: 14,
+                            question: "Le numérique responsable vise à :",
+                            options: {
+                                A: "Protéger l'environnement",
+                                B: "Accélérer l'obsolescence",
+                                C: "Multiplier les déchets électroniques",
+                                D: "Consommer plus d'énergie"
+                            },
+                            correct: "A",
+                            explanation: "Il cherche à limiter la pollution liée aux équipements numériques."
+                        },
+                        {
+                            id: 15,
+                            question: "Le reconditionnement permet de :",
+                            options: {
+                                A: "Détruire le matériel",
+                                B: "Réparer et remettre en circulation des appareils",
+                                C: "Les rendre inutilisables",
+                                D: "Les stocker définitivement"
+                            },
+                            correct: "B",
+                            explanation: "Le matériel reconditionné est réparé puis réutilisé."
+                        },
+                        {
+                            id: 16,
+                            question: "Les Big Tech sont :",
+                            options: {
+                                A: "De petites entreprises locales",
+                                B: "De grandes entreprises du numérique",
+                                C: "Des associations",
+                                D: "Des lycées"
+                            },
+                            correct: "B",
+                            explanation: "Les Big Tech sont de grandes entreprises mondiales du numérique."
+                        },
+                        {
+                            id: 17,
+                            question: "Quel est un inconvénient des abonnements numériques ?",
+                            options: {
+                                A: "Ils coûtent de l'argent chaque année",
+                                B: "Ils sont gratuits",
+                                C: "Ils fonctionnent sans Internet",
+                                D: "Ils ne changent jamais"
+                            },
+                            correct: "A",
+                            explanation: "Les abonnements représentent un coût récurrent pour les établissements."
+                        },
+                        {
+                            id: 18,
+                            question: "Le numérique durable cherche à :",
+                            options: {
+                                A: "Réduire l'impact environnemental",
+                                B: "Augmenter les déchets",
+                                C: "Raccourcir la durée de vie du matériel",
+                                D: "Bloquer les logiciels"
+                            },
+                            correct: "A",
+                            explanation: "Il vise à limiter l’empreinte carbone du numérique."
+                        },
+                        {
+                            id: 19,
+                            question: "Pourquoi privilégier les ressources libres ?",
+                            options: {
+                                A: "Pour copier sans réfléchir",
+                                B: "Pour partager légalement et gratuitement",
+                                C: "Pour vendre plus cher",
+                                D: "Pour limiter l'accès"
+                            },
+                            correct: "B",
+                            explanation: "Les ressources libres peuvent être partagées sans enfreindre la loi."
+                        },
+                        {
+                            id: 20,
+                            question: "Qu'est-ce qu'une dépendance numérique ?",
+                            options: {
+                                A: "Une autonomie totale",
+                                B: "Une obligation d'utiliser une seule entreprise",
+                                C: "Une liberté de choix",
+                                D: "Une sécurité maximale"
+                            },
+                            correct: "B",
+                            explanation: "Cela empêche de choisir librement ses outils."
+                        },
+
+                        {
+                            id: 21,
+                            question: "Quel est un avantage du logiciel libre ?",
+                            options: {
+                                A: "Il est fermé",
+                                B: "Il est modifiable",
+                                C: "Il est secret",
+                                D: "Il est payant obligatoirement"
+                            },
+                            correct: "B",
+                            explanation: "Le code peut être adapté selon les besoins."
+                        },
+                        {
+                            id: 22,
+                            question: "Le numérique inclusif permet :",
+                            options: {
+                                A: "D'exclure certains élèves",
+                                B: "L'accès au numérique pour tous",
+                                C: "D'augmenter les inégalités",
+                                D: "De bloquer l'apprentissage"
+                            },
+                            correct: "B",
+                            explanation: "Il garantit l’égalité d’accès aux outils numériques."
+                        },
+                        {
+                            id: 23,
+                            question: "Le numérique responsable agit surtout sur :",
+                            options: {
+                                A: "La publicité",
+                                B: "L'écologie et l'éthique",
+                                C: "Le sport",
+                                D: "La mode"
+                            },
+                            correct: "B",
+                            explanation: "Il concerne l’environnement, les données et les usages."
+                        },
+                        {
+                            id: 24,
+                            question: "Le matériel obsolète est un problème car :",
+                            options: {
+                                A: "Il produit des déchets électroniques",
+                                B: "Il consomme moins",
+                                C: "Il est renouvelable rapidement",
+                                D: "Il est toujours utile"
+                            },
+                            correct: "A",
+                            explanation: "Les déchets électroniques sont très polluants."
+                        },
+                        {
+                            id: 25,
+                            question: "Un établissement autonome numériquement est un établissement qui :",
+                            options: {
+                                A: "Dépend des Big Tech",
+                                B: "Utilise des solutions locales et libres",
+                                C: "N'a pas d'ordinateurs",
+                                D: "Utilise uniquement des logiciels payants"
+                            },
+                            correct: "B",
+                            explanation: "Il choisit ses outils librement."
+                        },
+                        {
+                            id: 26,
+                            question: "Le numérique durable cherche à prolonger :",
+                            options: {
+                                A: "La durée de vie du matériel",
+                                B: "Les abonnements",
+                                C: "Les déchets",
+                                D: "L'obsolescence"
+                            },
+                            correct: "A",
+                            explanation: "Un matériel plus longtemps utilisé = moins de pollution."
+                        },
+                        {
+                            id: 27,
+                            question: "Le stockage des données en Europe permet :",
+                            options: {
+                                A: "Une meilleure protection",
+                                B: "Une perte de données",
+                                C: "Une censure automatique",
+                                D: "Plus de publicité"
+                            },
+                            correct: "A",
+                            explanation: "Les lois européennes protègent les données personnelles."
+                        },
+                        {
+                            id: 28,
+                            question: "Un village numérique résistant symbolise :",
+                            options: {
+                                A: "La soumission aux Big Tech",
+                                B: "La résistance et l'autonomie",
+                                C: "La dépendance totale",
+                                D: "Le refus de la technologie"
+                            },
+                            correct: "B",
+                            explanation: "Il représente la capacité à choisir ses outils."
+                        },
+                        {
+                            id: 29,
+                            question: "Quel est un bon geste numérique responsable ?",
+                            options: {
+                                A: "Changer d'ordinateur chaque année",
+                                B: "Éteindre ses appareils quand on ne les utilise pas",
+                                C: "Laisser tout allumé",
+                                D: "Télécharger sans vérifier"
+                            },
+                            correct: "B",
+                            explanation: "Cela permet d’économiser de l’énergie."
+                        },
+                        {
+                            id: 30,
+                            question: "Le projet NIRD est avant tout :",
+                            options: {
+                                A: "Un business",
+                                B: "Un projet éducatif engagé",
+                                C: "Un jeu vidéo",
+                                D: "Une marque commerciale"
+                            },
+                            correct: "B",
+                            explanation: "Il s’agit d’une démarche pédagogique et citoyenne."
+                        },
+
+                        {
+                            id: 31,
+                            question: "Quel est un avantage écologique du logiciel libre ?",
+                            options: {
+                                A: "Il consomme plus d'énergie",
+                                B: "Il oblige à changer de matériel",
+                                C: "Il prolonge la durée de vie des ordinateurs",
+                                D: "Il augmente les déchets"
+                            },
+                            correct: "C",
+                            explanation: "Les ordinateurs restent utilisables plus longtemps."
+                        },
+                        {
+                            id: 32,
+                            question: "Pourquoi parle-t-on de “sobriété numérique” ?",
+                            options: {
+                                A: "Pour utiliser plus d'écrans",
+                                B: "Pour réduire l'usage inutile du numérique",
+                                C: "Pour consommer plus de données",
+                                D: "Pour accélérer Internet"
+                            },
+                            correct: "B",
+                            explanation: "Cela consiste à éviter le gaspillage numérique."
+                        },
+                        {
+                            id: 33,
+                            question: "Le reconditionnement permet surtout de :",
+                            options: {
+                                A: "Jeter plus vite les appareils",
+                                B: "Réparer et revendre à moindre coût",
+                                C: "Bloquer les ordinateurs",
+                                D: "Supprimer les systèmes d'exploitation"
+                            },
+                            correct: "B",
+                            explanation: "On limite ainsi les déchets et les coûts."
+                        },
+                        {
+                            id: 34,
+                            question: "Quel est l'un des risques de la dépendance aux Big Tech ?",
+                            options: {
+                                A: "Trop de liberté",
+                                B: "Perte d'autonomie numérique",
+                                C: "Trop peu de mises à jour",
+                                D: "Trop de logiciels libres"
+                            },
+                            correct: "B",
+                            explanation: "On ne contrôle plus ses outils ni ses données."
+                        },
+                        {
+                            id: 35,
+                            question: "Un numérique éthique signifie :",
+                            options: {
+                                A: "Un numérique sans règles",
+                                B: "Un numérique respectueux des personnes et des données",
+                                C: "Un numérique uniquement payant",
+                                D: "Un numérique réservé aux experts"
+                            },
+                            correct: "B",
+                            explanation: "Il respecte la vie privée et les utilisateurs."
+                        },
+                        {
+                            id: 36,
+                            question: "Pourquoi éviter le renouvellement systématique du matériel ?",
+                            options: {
+                                A: "Parce qu'il coûte trop cher uniquement",
+                                B: "Parce qu'il augmente l'empreinte carbone",
+                                C: "Parce qu'il est interdit",
+                                D: "Parce qu'il est inutile à l'école"
+                            },
+                            correct: "B",
+                            explanation: "Produire du matériel génère beaucoup de pollution."
+                        },
+                        {
+                            id: 37,
+                            question: "Le partage de ressources numériques libres permet :",
+                            options: {
+                                A: "De limiter l'accès",
+                                B: "De favoriser la collaboration",
+                                C: "De vendre plus cher",
+                                D: "De restreindre l'éducation"
+                            },
+                            correct: "B",
+                            explanation: "Le partage facilite le travail collectif."
+                        },
+                        {
+                            id: 38,
+                            question: "Quelle action correspond à une démarche NIRD ?",
+                            options: {
+                                A: "Acheter du matériel neuf chaque année",
+                                B: "Installer Linux sur d'anciens ordinateurs",
+                                C: "Multiplier les abonnements",
+                                D: "Dépendre d'un seul fournisseur"
+                            },
+                            correct: "B",
+                            explanation: "Cela permet de réutiliser le matériel existant."
+                        },
+                        {
+                            id: 39,
+                            question: "Un numérique durable est un numérique qui :",
+                            options: {
+                                A: "S'use vite",
+                                B: "Dure dans le temps",
+                                C: "Devient vite inutilisable",
+                                D: "Doit être remplacé souvent"
+                            },
+                            correct: "B",
+                            explanation: "La durabilité vise la longévité des équipements."
+                        },
+                        {
+                            id: 40,
+                            question: "Quel est l'objectif principal d'un établissement engagé dans NIRD ?",
+                            options: {
+                                A: "Dépenser plus",
+                                B: "Être autonome, responsable et durable",
+                                C: "Dépendre des grandes entreprises",
+                                D: "Supprimer le numérique"
+                            },
+                            correct: "B",
+                            explanation: "L’objectif est l’autonomie technologique et écologique."
+                        }
+                    ]
+                };
+                let index = 0;
+                formActive = true;
+
+                nextQuestion = function() {
+
+                    if (index >= questionnaire.questions.length) {
+                        this.print("🎉 Fin du questionnaire !");
+                        formActive = false;
+                        return;
+                    }
+
+                    currentQuestion = questionnaire.questions[index];
+                    const q = currentQuestion;
+
+                    this.print("");
+                    this.print("❓ Question " + q.id + " : " + q.question);
+
+                    Object.entries(q.options).forEach(([key, value]) => {
+                        this.print("   ▸ " + key + " : " + value);
+                    });
+
+                    this.print("");
+                    this.print("👉 Réponds avec : rep A | rep B | rep C | rep D");
+
+                    index++;
+                };
+
+                this.print("=== QCM NIRD ===");
+                this.print("Version : " + questionnaire.version);
+                this.print("Langue : " + questionnaire.language);
+                this.print("Titre  : " + questionnaire.title);
+                this.print("");
+                this.print("Tape : rep A | rep B | rep C | rep D");
+                this.print("");
+
+                nextQuestion.call(this);
+            });
 
             // Exemple: exécuter une commande automatiquement au chargement
             // terminal.execute('about');
