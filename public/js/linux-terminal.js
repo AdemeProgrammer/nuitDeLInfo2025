@@ -42,6 +42,7 @@ class LinuxTerminal {
             matrix: this.cmdMatrix.bind(this),
             hack: this.cmdHack.bind(this),
             coffee: this.cmdCoffee.bind(this),
+            pacman: this.cmdPacman.bind(this),
             // Exemple de commande qui ne fait "rien" mais lance un jeu
             rien: this.cmdRien.bind(this)
         };
@@ -288,6 +289,7 @@ FUN / JEUX:
   matrix            Effet Matrix
   hack              Mode hacker
   coffee            Prépare un café ☕
+  pacman            Mini-jeu Pac-Man rétro
   rien              Lance une surprise...
 
 Utilisez TAB pour l'autocomplétion
@@ -529,6 +531,65 @@ Ctrl+C pour annuler la commande
                 this.print('Tapez "rien" à nouveau pour rejouer!', 'output');
             }, 1000);
         }, 500);
+    }
+
+    cmdPacman(args) {
+        this.print('🎮 Chargement de Pac-Man...', 'success');
+
+        // Créer un conteneur pour le sprite qui passe par-dessus tout
+        const spriteContainer = document.createElement('div');
+        spriteContainer.id = 'pacman-sprite-container';
+        const spriteWidth = window.innerHeight * 1.5; // Largeur proportionnelle à la hauteur
+        spriteContainer.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: -${spriteWidth}px;
+            z-index: 999999;
+            pointer-events: none;
+            width: ${spriteWidth}px;
+            height: 100vh;
+        `;
+
+        // Créer l'image du sprite
+        const spriteImg = document.createElement('img');
+        spriteImg.src = '/images/pacman-sprite.avif';
+        spriteImg.style.cssText = `
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            box-shadow: 0 0 100px rgba(0, 0, 0, 0.8);
+        `;
+
+        spriteContainer.appendChild(spriteImg);
+        document.body.appendChild(spriteContainer);
+
+        // Animation de défilement de gauche à droite
+        let position = -spriteWidth;
+        const endPosition = window.innerWidth + 100;
+        const speed = 5; // pixels par frame
+
+        const animate = () => {
+            if (position < endPosition) {
+                position += speed;
+                spriteContainer.style.left = position + 'px';
+                requestAnimationFrame(animate);
+            } else {
+                // Animation terminée, supprimer le sprite
+                document.body.removeChild(spriteContainer);
+                this.print('👾 Pac-Man a terminé son parcours!', 'success');
+            }
+        };
+
+        // Attendre que l'image soit chargée avant de démarrer l'animation
+        spriteImg.onload = () => {
+            animate();
+        };
+
+        // Gérer le cas où l'image ne charge pas
+        spriteImg.onerror = () => {
+            document.body.removeChild(spriteContainer);
+            this.print('❌ Erreur: Impossible de charger le sprite Pac-Man', 'error');
+        };
     }
 
     // ============== API PUBLIQUE ==============
