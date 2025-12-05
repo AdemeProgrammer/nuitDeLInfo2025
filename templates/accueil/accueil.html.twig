@@ -61,6 +61,7 @@
                 <li>• <span style="color: #00ffff;">matrix</span> - Effet Matrix</li>
                 <li>• <span style="color: #00ffff;">hack</span> - Mode hacker</li>
                 <li>• <span style="color: #00ffff;">coffee</span> - Prépare un café</li>
+                <li>• <span style="color: #00ffff;">pulga</span> - Affiche le drapeau PULGA</li>
                 <li>• <span style="color: #00ffff;">rien</span> - Commande secrète...</li>
             </ul>
             <p style="margin-top: 15px;"><strong>Raccourcis clavier:</strong></p>
@@ -238,6 +239,70 @@ Essayez 'rien' pour une surprise... 😉
 `;
                 this.print(cow, 'output');
             });
+
+            terminal.addCommand('pulga', function(args) {
+                this.print('🏳️ EASTER EGG PULGA ACTIVÉ!', 'success');
+                this.print('🚀 Le drapeau arrive...', 'warning');
+
+                // Créer un conteneur qui passe par-dessus tout
+                const flagContainer = document.createElement('div');
+                flagContainer.id = 'pulga-flag-container';
+                const flagWidth = window.innerHeight * 1.8; // Encore plus grand que Pac-Man
+                flagContainer.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: -${flagWidth}px;
+                    z-index: 999999;
+                    pointer-events: none;
+                    width: ${flagWidth}px;
+                    height: 100vh;
+                `;
+
+                // Créer l'image du drapeau
+                const flagImg = document.createElement('img');
+                flagImg.src = '/images/drapeau-israel.avif';
+                flagImg.style.cssText = `
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    box-shadow: 0 0 150px rgba(0, 255, 255, 0.9), 0 0 300px rgba(255, 0, 255, 0.5);
+                    filter: brightness(1.2) contrast(1.1);
+                `;
+
+                flagContainer.appendChild(flagImg);
+                document.body.appendChild(flagContainer);
+
+                // Animation de défilement de gauche à droite
+                let position = -flagWidth;
+                const endPosition = window.innerWidth + 100;
+                const speed = 8; // Plus rapide pour un effet dramatique
+
+                const animate = () => {
+                    if (position < endPosition) {
+                        position += speed;
+                        flagContainer.style.left = position + 'px';
+                        requestAnimationFrame(animate);
+                    } else {
+                        // Animation terminée, supprimer le drapeau
+                        document.body.removeChild(flagContainer);
+                        this.print('', 'output');
+                        this.print('✨ PULGA - Numérique Inclusif, Responsable et Durable ✨', 'success');
+                        this.print('🎊 Easter Egg trouvé! +1000 points!', 'warning');
+                    }
+                };
+
+                // Attendre que l'image soit chargée avant de démarrer l'animation
+                flagImg.onload = () => {
+                    animate();
+                };
+
+                // Gérer le cas où l'image ne charge pas
+                flagImg.onerror = () => {
+                    document.body.removeChild(flagContainer);
+                    this.print('❌ Erreur: Impossible de charger le drapeau PULGA', 'error');
+                };
+            });
+
             let formActive = false;
             let currentQuestion = null;
 

@@ -1,0 +1,179 @@
+{#
+* Projet Nuit de l'Info — 2025
+* Ce programme est publié sous licence GNU AGPLv3.
+* Vous pouvez obtenir une copie de la licence à :
+* https://www.gnu.org/licenses/agpl-3.0.html
+#}
+{% extends 'retro_base.html.twig' %}
+
+{% block title %}Cybersécurité{% endblock %}
+
+{% block header_subtitle %}PULGA - CYBERSÉCURITÉ ET PRÉVENTION{% endblock %}
+
+{% block main_content %}
+<div class="retro-card retro-float">
+    <h2 class="retro-subtitle">🎮 BIENVENUE SUR CETTE PAGE 🎮</h2>
+    <p class="retro-text retro-mb-2">
+        Explorez notre contenu et découvrez des informations intéressantes sur la cybersécurité...
+    </p>
+</div>
+
+<div id="prevention-message" class="retro-card retro-mt-2" style="display: none;">
+    <h2 class="retro-subtitle">⚠️ ATTENTION! LEÇON DE SÉCURITÉ ⚠️</h2>
+    <div class="retro-text">
+        <p style="margin-bottom: 20px; font-size: 16px; color: #ffff00;">
+            <strong>Tu viens de fermer plusieurs pop-ups suspects...</strong>
+        </p>
+        <p><strong>🛡️ MESSAGE DE PRÉVENTION IMPORTANT:</strong></p>
+        <ul style="list-style: none; padding-left: 20px; margin-top: 15px;">
+            <li>❌ <strong>NE CLIQUE PAS sur tout et n'importe quoi!</strong></li>
+            <li>⚠️ Les pop-ups peuvent être dangereux et contenir des virus ou des arnaques</li>
+            <li>🔒 Vérifie toujours l'origine d'un lien avant de cliquer</li>
+            <li>🚫 N'installe jamais de logiciel provenant d'une source douteuse</li>
+            <li>💡 Si quelque chose semble trop beau pour être vrai, c'est probablement une arnaque</li>
+            <li>🛡️ Utilise un antivirus à jour et méfie-toi des téléchargements</li>
+            <li>📧 Attention aux emails suspects et aux pièces jointes inconnues</li>
+            <li>🎣 Le phishing (hameçonnage) est l'une des techniques les plus utilisées par les pirates</li>
+        </ul>
+        <p style="margin-top: 20px; color: #00ff41; font-weight: bold; font-size: 18px;">
+            ✨ RAPPELLE-TOI: La meilleure protection contre les virus et les arnaques, c'est TON ATTENTION et TA PRUDENCE!
+        </p>
+        <p style="margin-top: 15px; color: #00ffff;">
+            💡 Ne te laisse pas piéger par des offres trop alléchantes ou des alertes de sécurité suspectes.
+        </p>
+    </div>
+</div>
+
+<!-- Container pour les pop-ups virus -->
+<div id="virus-container"></div>
+{% endblock %}
+
+{% block footer %}
+    <footer class="retro-border retro-mt-3">
+        <div class="retro-center">
+            <p class="retro-text">
+                {% block footer_text %}
+                    <span class="retro-blink">★</span> NUIT DE L'INFO 2025 <span class="retro-blink">★</span>
+                    <br>
+                    © 2025 — PULGA
+                    Code source publié sous licence
+                    <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank">AGPLv3</a>
+            {% endblock %}
+            </p>
+        </div>
+    </footer>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        #virus-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .virus-popup {
+            position: absolute;
+            background: linear-gradient(135deg, #ff0000 0%, #ff6600 100%);
+            border: 4px solid #ffff00;
+            border-radius: 0;
+            padding: 15px;
+            min-width: 200px;
+            max-width: 300px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 102, 0, 0.6);
+            pointer-events: all;
+            cursor: pointer;
+            animation: shake 0.5s infinite, blink-border 1s infinite;
+            font-family: 'Courier New', monospace;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .virus-popup:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 0, 0, 1), 0 0 60px rgba(255, 102, 0, 0.8);
+        }
+
+        .virus-popup-header {
+            background: #000;
+            color: #ff0000;
+            padding: 5px 10px;
+            margin: -15px -15px 10px -15px;
+            font-weight: bold;
+            border-bottom: 2px solid #ffff00;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .virus-popup-close {
+            background: #ff0000;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 2px 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .virus-popup-close:hover {
+            background: #fff;
+            color: #ff0000;
+        }
+
+        .virus-popup-body {
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            10% { transform: translate(-5px, -5px) rotate(-1deg); }
+            20% { transform: translate(5px, 5px) rotate(1deg); }
+            30% { transform: translate(-5px, 5px) rotate(-1deg); }
+            40% { transform: translate(5px, -5px) rotate(1deg); }
+            50% { transform: translate(-5px, -5px) rotate(-1deg); }
+            60% { transform: translate(5px, 5px) rotate(1deg); }
+            70% { transform: translate(-5px, 5px) rotate(-1deg); }
+            80% { transform: translate(5px, -5px) rotate(1deg); }
+            90% { transform: translate(-5px, -5px) rotate(-1deg); }
+        }
+
+        @keyframes blink-border {
+            0%, 100% { border-color: #ffff00; }
+            50% { border-color: #ff0000; }
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: scale(0) rotate(360deg);
+            }
+        }
+
+        .virus-popup.closing {
+            animation: fadeOut 0.5s forwards;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/virus-game.js') }}"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const virusGame = new VirusGame({
+                totalViruses: 6,
+                container: document.getElementById('virus-container'),
+                preventionMessage: document.getElementById('prevention-message'),
+                autoStart: true
+            });
+        });
+    </script>
+{% endblock %}

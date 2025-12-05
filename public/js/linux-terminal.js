@@ -290,6 +290,7 @@ FUN / JEUX:
   hack              Mode hacker
   coffee            Prépare un café ☕
   pacman            Mini-jeu Pac-Man rétro
+  pulga             Affiche le drapeau PULGA
   rien              Lance une surprise...
 
 Utilisez TAB pour l'autocomplétion
