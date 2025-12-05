@@ -1,0 +1,226 @@
+/**
+ * SNAKE GAME CSS
+ * Style rétro pour le jeu Snake intégré au terminal
+ * Nuit de l'Info 2025
+ */
+
+#snake-game-temp-container {
+    width: 100%;
+    min-height: 500px;
+    position: relative;
+    z-index: 10;
+    background: transparent;
+}
+
+.snake-game-container {
+    width: 100%;
+    background: #000;
+    border: 2px solid #00ff41;
+    padding: 20px;
+    box-shadow:
+        0 0 20px rgba(0, 255, 65, 0.3),
+        inset 0 0 20px rgba(0, 255, 65, 0.1);
+    font-family: 'Courier New', monospace;
+    position: relative;
+}
+
+.snake-game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: rgba(0, 255, 65, 0.1);
+    border: 1px solid #00ff41;
+}
+
+.snake-game-title {
+    color: #00ff41;
+    font-size: 1.2rem;
+    text-shadow: 0 0 10px #00ff41;
+    letter-spacing: 2px;
+}
+
+.snake-game-score {
+    color: #ffff00;
+    font-size: 1rem;
+    text-shadow: 0 0 10px #ffff00;
+}
+
+.snake-game-canvas-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+#snakeCanvas {
+    border: 2px solid #00ff41;
+    background: #0a0a0a;
+    box-shadow:
+        0 0 20px rgba(0, 255, 65, 0.5),
+        inset 0 0 30px rgba(0, 255, 65, 0.05);
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+.snake-game-controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.snake-button {
+    background: #000;
+    color: #00ff41;
+    border: 2px solid #00ff41;
+    padding: 10px 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
+.snake-button:hover {
+    background: #00ff41;
+    color: #000;
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.8);
+    transform: translateY(-2px);
+}
+
+.snake-button:active {
+    transform: translateY(0);
+}
+
+.snake-button.danger {
+    color: #ff0055;
+    border-color: #ff0055;
+    box-shadow: 0 0 10px rgba(255, 0, 85, 0.3);
+}
+
+.snake-button.danger:hover {
+    background: #ff0055;
+    color: #000;
+    box-shadow: 0 0 20px rgba(255, 0, 85, 0.8);
+}
+
+.snake-game-info {
+    color: #00ffff;
+    font-size: 0.85rem;
+    text-align: center;
+    line-height: 1.6;
+    padding: 10px;
+    background: rgba(0, 255, 255, 0.05);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+.snake-game-info .key {
+    color: #ffff00;
+    font-weight: bold;
+    padding: 2px 6px;
+    background: rgba(255, 255, 0, 0.1);
+    border: 1px solid rgba(255, 255, 0, 0.3);
+    border-radius: 2px;
+}
+
+.snake-game-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.95);
+    border: 3px solid #ff0055;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(255, 0, 85, 0.8);
+    z-index: 10;
+    min-width: 300px;
+}
+
+.snake-game-overlay h2 {
+    color: #ff0055;
+    font-size: 2rem;
+    margin: 0 0 20px 0;
+    text-shadow: 0 0 20px #ff0055;
+    letter-spacing: 3px;
+}
+
+.snake-game-overlay p {
+    color: #00ff41;
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+.snake-game-overlay .final-score {
+    color: #ffff00;
+    font-size: 1.5rem;
+    margin: 15px 0;
+    text-shadow: 0 0 15px #ffff00;
+}
+
+/* Animation de clignotement pour le game over */
+@keyframes blink-red {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.snake-game-overlay h2 {
+    animation: blink-red 1s infinite;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .snake-game-container {
+        padding: 10px;
+    }
+
+    .snake-game-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    #snakeCanvas {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .snake-game-controls {
+        gap: 10px;
+    }
+
+    .snake-button {
+        padding: 8px 15px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Effet de scanlines rétro */
+.snake-game-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 255, 65, 0.03) 0px,
+        transparent 1px,
+        transparent 2px,
+        rgba(0, 255, 65, 0.03) 3px
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+.snake-game-container > * {
+    position: relative;
+    z-index: 2;
+}

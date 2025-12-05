@@ -38,6 +38,7 @@ class LinuxTerminal {
             neofetch: this.cmdNeofetch.bind(this),
             // Commandes fun/jeux
             snake: this.cmdSnake.bind(this),
+            tetris: this.cmdTetris.bind(this),
             matrix: this.cmdMatrix.bind(this),
             hack: this.cmdHack.bind(this),
             coffee: this.cmdCoffee.bind(this),
@@ -283,6 +284,7 @@ SYSTÈME:
 
 FUN / JEUX:
   snake             Lance le jeu Snake
+  tetris            Lance le jeu Tetris
   matrix            Effet Matrix
   hack              Mode hacker
   coffee            Prépare un café ☕
@@ -366,13 +368,85 @@ Ctrl+C pour annuler la commande
     // ============== COMMANDES FUN/JEUX ==============
 
     cmdSnake(args) {
-        this.print('🐍 Lancement du jeu Snake...', 'success');
-        this.print('Utilisez les flèches ← ↑ → ↓ pour jouer', 'output');
-        this.print('[Simulation] GAME START!', 'warning');
-        this.print('Score: 0 | High Score: 9999', 'output');
-        setTimeout(() => {
-            this.print('🎮 Game Over! Score: 42', 'error');
-        }, 2000);
+        // Cacher le terminal et afficher le jeu Snake
+        this.hideTerminal();
+
+        // Créer un container temporaire pour le jeu
+        const gameContainer = document.createElement('div');
+        gameContainer.id = 'snake-game-temp-container';
+        gameContainer.style.width = '100%';
+        gameContainer.style.display = 'block';
+        this.container.appendChild(gameContainer);
+
+        // Lancer le jeu Snake
+        const snakeGame = new SnakeGame('snake-game-temp-container');
+
+        // Écouter l'événement de sortie du jeu
+        const exitHandler = () => {
+            // Détruire le jeu
+            if (snakeGame) {
+                snakeGame.destroy();
+            }
+
+            // Retirer le container du jeu
+            if (gameContainer && gameContainer.parentNode) {
+                gameContainer.parentNode.removeChild(gameContainer);
+            }
+
+            // Réafficher le terminal
+            this.showTerminal();
+
+            // Attendre un peu avant d'afficher le message pour éviter les problèmes de rendu
+            setTimeout(() => {
+                this.print('🐍 Jeu Snake terminé. Merci d\'avoir joué!', 'success');
+            }, 100);
+
+            // Retirer l'event listener
+            document.removeEventListener('snakeGameExit', exitHandler);
+        };
+
+        document.addEventListener('snakeGameExit', exitHandler);
+    }
+
+    cmdTetris(args) {
+        // Cacher le terminal et afficher le jeu Tetris
+        this.hideTerminal();
+
+        // Créer un container temporaire pour le jeu
+        const gameContainer = document.createElement('div');
+        gameContainer.id = 'tetris-game-temp-container';
+        gameContainer.style.width = '100%';
+        gameContainer.style.display = 'block';
+        this.container.appendChild(gameContainer);
+
+        // Lancer le jeu Tetris
+        const tetrisGame = new TetrisGame('tetris-game-temp-container');
+
+        // Écouter l'événement de sortie du jeu
+        const exitHandler = () => {
+            // Détruire le jeu
+            if (tetrisGame) {
+                tetrisGame.destroy();
+            }
+
+            // Retirer le container du jeu
+            if (gameContainer && gameContainer.parentNode) {
+                gameContainer.parentNode.removeChild(gameContainer);
+            }
+
+            // Réafficher le terminal
+            this.showTerminal();
+
+            // Attendre un peu avant d'afficher le message pour éviter les problèmes de rendu
+            setTimeout(() => {
+                this.print('◼ Jeu Tetris terminé. Merci d\'avoir joué!', 'success');
+            }, 100);
+
+            // Retirer l'event listener
+            document.removeEventListener('tetrisGameExit', exitHandler);
+        };
+
+        document.addEventListener('tetrisGameExit', exitHandler);
     }
 
     cmdMatrix(args) {
@@ -458,6 +532,21 @@ Ctrl+C pour annuler la commande
     }
 
     // ============== API PUBLIQUE ==============
+
+    /**
+     * Cache le terminal (pour afficher un jeu par exemple)
+     */
+    hideTerminal() {
+        this.container.classList.add('game-active');
+    }
+
+    /**
+     * Réaffiche le terminal
+     */
+    showTerminal() {
+        this.container.classList.remove('game-active');
+        this.focusInput();
+    }
 
     /**
      * Ajoute une commande personnalisée

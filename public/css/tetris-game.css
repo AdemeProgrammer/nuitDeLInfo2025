@@ -1,0 +1,325 @@
+/**
+ * TETRIS GAME CSS
+ * Style rétro pour le jeu Tetris intégré au terminal
+ * Nuit de l'Info 2025
+ */
+
+#tetris-game-temp-container {
+    width: 100%;
+    min-height: 600px;
+    position: relative;
+    z-index: 10;
+    background: transparent;
+}
+
+.tetris-game-container {
+    width: 100%;
+    background: #000;
+    border: 2px solid #00ff41;
+    padding: 20px;
+    box-shadow:
+        0 0 20px rgba(0, 255, 65, 0.3),
+        inset 0 0 20px rgba(0, 255, 65, 0.1);
+    font-family: 'Courier New', monospace;
+    position: relative;
+}
+
+.tetris-game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: rgba(0, 255, 65, 0.1);
+    border: 1px solid #00ff41;
+}
+
+.tetris-game-title {
+    color: #00ff41;
+    font-size: 1.5rem;
+    text-shadow: 0 0 10px #00ff41;
+    letter-spacing: 3px;
+    font-weight: bold;
+}
+
+.tetris-game-stats {
+    display: flex;
+    gap: 20px;
+    color: #00ffff;
+    font-size: 0.9rem;
+}
+
+.tetris-stat {
+    text-align: center;
+}
+
+.tetris-stat-label {
+    color: #ffff00;
+    font-size: 0.7rem;
+    display: block;
+}
+
+.tetris-stat-value {
+    color: #00ffff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px #00ffff;
+}
+
+.tetris-game-content {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.tetris-game-main {
+    position: relative;
+}
+
+#tetrisCanvas {
+    border: 3px solid #00ff41;
+    background: #0a0a0a;
+    box-shadow:
+        0 0 20px rgba(0, 255, 65, 0.5),
+        inset 0 0 30px rgba(0, 255, 65, 0.05);
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+.tetris-game-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.tetris-next-piece {
+    background: rgba(0, 255, 65, 0.1);
+    border: 2px solid #00ff41;
+    padding: 15px;
+    text-align: center;
+}
+
+.tetris-next-piece h3 {
+    color: #00ff41;
+    margin: 0 0 10px 0;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+#nextPieceCanvas {
+    border: 1px solid #00ff41;
+    background: #000;
+    margin: 0 auto;
+    display: block;
+}
+
+.tetris-game-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.tetris-button {
+    background: #000;
+    color: #00ff41;
+    border: 2px solid #00ff41;
+    padding: 10px 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
+.tetris-button:hover {
+    background: #00ff41;
+    color: #000;
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.8);
+    transform: translateY(-2px);
+}
+
+.tetris-button:active {
+    transform: translateY(0);
+}
+
+.tetris-button.danger {
+    color: #ff0055;
+    border-color: #ff0055;
+    box-shadow: 0 0 10px rgba(255, 0, 85, 0.3);
+}
+
+.tetris-button.danger:hover {
+    background: #ff0055;
+    color: #000;
+    box-shadow: 0 0 20px rgba(255, 0, 85, 0.8);
+}
+
+.tetris-game-info {
+    color: #00ffff;
+    font-size: 0.85rem;
+    text-align: center;
+    line-height: 1.8;
+    padding: 15px;
+    background: rgba(0, 255, 255, 0.05);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+.tetris-game-info .key {
+    color: #ffff00;
+    font-weight: bold;
+    padding: 2px 6px;
+    background: rgba(255, 255, 0, 0.1);
+    border: 1px solid rgba(255, 255, 0, 0.3);
+    border-radius: 2px;
+    margin: 0 2px;
+}
+
+.tetris-game-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.95);
+    border: 3px solid #ff0055;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(255, 0, 85, 0.8);
+    z-index: 100;
+    min-width: 350px;
+}
+
+.tetris-game-overlay h2 {
+    color: #ff0055;
+    font-size: 2.5rem;
+    margin: 0 0 20px 0;
+    text-shadow: 0 0 20px #ff0055;
+    letter-spacing: 5px;
+}
+
+.tetris-game-overlay p {
+    color: #00ffff;
+    font-size: 1.1rem;
+    margin: 10px 0;
+}
+
+.tetris-game-overlay .final-stats {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(0, 255, 65, 0.1);
+    border: 1px solid #00ff41;
+}
+
+.tetris-game-overlay .stat-line {
+    color: #ffff00;
+    font-size: 1.2rem;
+    margin: 8px 0;
+}
+
+/* Animation de clignotement pour le game over */
+@keyframes blink-red {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.tetris-game-overlay h2 {
+    animation: blink-red 1s infinite;
+}
+
+/* Animation de ligne complète */
+@keyframes line-clear {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; background: #ffff00; }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .tetris-game-container {
+        padding: 10px;
+    }
+
+    .tetris-game-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .tetris-game-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tetris-game-sidebar {
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .tetris-next-piece {
+        flex: 1;
+    }
+
+    #tetrisCanvas {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .tetris-game-controls {
+        gap: 10px;
+    }
+
+    .tetris-button {
+        padding: 8px 15px;
+        font-size: 0.8rem;
+    }
+
+    .tetris-game-overlay {
+        min-width: 280px;
+        padding: 25px;
+    }
+
+    .tetris-game-overlay h2 {
+        font-size: 2rem;
+    }
+}
+
+/* Effet de scanlines rétro */
+.tetris-game-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 255, 65, 0.03) 0px,
+        transparent 1px,
+        transparent 2px,
+        rgba(0, 255, 65, 0.03) 3px
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+.tetris-game-container > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Effet de particules pour les lignes complétées */
+@keyframes particle-float {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-50px) scale(0);
+        opacity: 0;
+    }
+}

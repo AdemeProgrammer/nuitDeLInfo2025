@@ -57,6 +57,7 @@
                 <li>• <span style="color: #00ffff;">print [texte]</span> - Affiche du texte stylisé</li>
                 <li>• <span style="color: #00ffff;">ls</span> - Liste les fichiers</li>
                 <li>• <span style="color: #00ffff;">snake</span> - Lance le jeu Snake</li>
+                <li>• <span style="color: #00ffff;">tetris</span> - Lance le jeu Tetris</li>
                 <li>• <span style="color: #00ffff;">matrix</span> - Effet Matrix</li>
                 <li>• <span style="color: #00ffff;">hack</span> - Mode hacker</li>
                 <li>• <span style="color: #00ffff;">coffee</span> - Prépare un café</li>
@@ -108,9 +109,19 @@
     </footer>
 {% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {# CSS pour les jeux #}
+    <link rel="stylesheet" href="{{ asset('css/snake-game.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/tetris-game.css') }}">
+{% endblock %}
+
 {% block javascripts %}
     {# Inclusion du script de la console #}
     <script src="{{ asset('js/linux-terminal.js') }}"></script>
+    {# Inclusion des jeux #}
+    <script src="{{ asset('js/snake-game.js') }}"></script>
+    <script src="{{ asset('js/tetris-game.js') }}"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
