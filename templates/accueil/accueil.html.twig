@@ -108,9 +108,17 @@
     </footer>
 {% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {# CSS pour le jeu Snake #}
+    <link rel="stylesheet" href="{{ asset('css/snake-game.css') }}">
+{% endblock %}
+
 {% block javascripts %}
     {# Inclusion du script de la console #}
     <script src="{{ asset('js/linux-terminal.js') }}"></script>
+    {# Inclusion du jeu Snake #}
+    <script src="{{ asset('js/snake-game.js') }}"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
